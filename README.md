@@ -1,1 +1,1 @@
-https://game-huufat1k3-thinulas-projects.vercel.app
+https://game-hub-chi-sable.vercel.app/
