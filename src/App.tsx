@@ -26,7 +26,7 @@ import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenereList from "./components/GenereList";
 import { Genere } from "./hooks/useGenere";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { PlatformSelector } from "./components/PlatformSelector";
 import { platform } from "./hooks/useGames";
 import SortSelector from "./components/SortSelector";
@@ -44,7 +44,7 @@ function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   return (
     <Grid
