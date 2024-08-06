@@ -31,7 +31,6 @@ import { PlatformSelector } from "./components/PlatformSelector";
 import { platform } from "./hooks/useGames";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
-import Mobilenavbar from "./components/Mobilenavbar";
 import React from "react";
 
 export interface GameQuery {
