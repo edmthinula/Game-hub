@@ -8,8 +8,8 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import useGenere, { Genere } from "../hooks/useGenere";
-import getCroppedImageUrl from "../services/image-url";
+import useGenere, { Genere } from "../../hooks/useGenere";
+import getCroppedImageUrl from "../../services/image-url";
 
 interface Props {
   onSelectGenre: (genre: Genere) => void;

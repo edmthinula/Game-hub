@@ -1,9 +1,10 @@
 import React from 'react'
-import { Game } from '../hooks/useGames';
+import { Game } from '../../hooks/useGames';
 import { Card, CardBody, HStack, Heading, Image, Text } from '@chakra-ui/react';
 import PlatformIconList from './PlatformIconList';
 import CreditScore from './CreditScore';
-import getCroppedImageUrl from '../services/image-url';
+import getCroppedImageUrl from '../../services/image-url';
+import { Link } from 'react-router-dom';
 
 interface Props{
     game : Game;
@@ -11,6 +12,7 @@ interface Props{
 
 const GameCard = ({game}:Props) => {
   return (
+    <Link to={`/game/${game.id}`} style={{textDecoration:'none',color:'inherit'}}>
     <Card>
         <Image src ={getCroppedImageUrl(game.background_image)}/>
         <CardBody>
@@ -24,6 +26,7 @@ const GameCard = ({game}:Props) => {
             </HStack>
         </CardBody>
     </Card>
+    </Link>
   )
 }
 
