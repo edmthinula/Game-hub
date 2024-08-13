@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  margin: 0 0 auto auto;
+  position: relative;
+  list-style: none;
+  padding: 0;
+  max-width: 800px; 
+}
+
+.slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  height: 500px;
+}
+
+.slide h1{
+  font-size: 48px;
+
+}
+
+

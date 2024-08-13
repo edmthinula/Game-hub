@@ -1,9 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import ScreenShots from '../components/Gamedetails/ScreenShots';
-import Achievments from '../components/Gamedetails/Achievments';
-import Stores from '../components/Gamedetails/Stores';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import {
+  Box,
+  Flex,
+  Heading,
+  Spacer,
+  Stack,
+  StackDivider,
+  Text,
+} from "@chakra-ui/react";
+import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import ScreenShots from "../components/Gamedetails/ScreenShots";
+import Achievments from "../components/Gamedetails/Achievments";
+import Stores from "../components/Gamedetails/Stores";
+import "./gamedetails.css";
 
 interface GameDetail {
   id: number;
@@ -45,46 +56,78 @@ const GameDetail: React.FC = () => {
 
   return (
     <div>
-    <div 
-    style={{
-      backgroundImage: `url(${gameDetail.background_image})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      height: '100vh',
-      width: '100vw',
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      zIndex: -1,
-      filter: 'brightness(0.5) blur(5px)',
-    }}
-    />
       <div
-      style={{
-        position: 'relative',
-        zIndex: 1,
-        padding: '20px',
-        color: 'white',
-      }}
-      >
-      <h1>{gameDetail.name}</h1>
-      {/* <img src={gameDetail.background_image} alt={gameDetail.name} /> */}
-      <p>Released: {gameDetail.released}</p>
-      <p>Metacritic Score: {gameDetail.metacritic}</p>
-      <p>{gameDetail.description}</p>
-      <p>
-        Website:{" "}
-        <a href={gameDetail.website} target="_blank" rel="noopener noreferrer">
-          {gameDetail.website}
-        </a>
-      </p>
-      <p>
-        Platforms:{" "}
-        {gameDetail.platforms.map((platform) => platform.platform.name).join(", ")}
-      </p>
-    {/* <ScreenShots ids={id}/> */}
-    {/* <Achievments ids={id}/> */}
-    {/* <Stores ids={id}/> */}
+        className="fixedimg"
+        style={{
+          backgroundImage: `url(${gameDetail.background_image})`,
+        }}
+      />
+      <div className="details">
+        <Flex display={{ md: "flex" }}  align="center"  width="100%">
+          <Box>
+            <Card>
+              <CardHeader>
+                <Heading size="md">Client Report</Heading>
+              </CardHeader>
+
+              <CardBody>
+                <Stack divider={<StackDivider />} spacing="4">
+                  <Box>
+                    <Heading size="xs" textTransform="uppercase">
+                      Summary
+                    </Heading>
+                    <Text pt="2" fontSize="sm">
+                      View a summary of all your clients over the last month.
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading size="xs" textTransform="uppercase">
+                      Overview
+                    </Heading>
+                    <Text pt="2" fontSize="sm">
+                      Check out the overview of your clients.
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading size="xs" textTransform="uppercase">
+                      Analysis
+                    </Heading>
+                    <Text pt="2" fontSize="sm">
+                      See a detailed analysis of all your business clients.
+                    </Text>
+                  </Box>
+                </Stack>
+              </CardBody>
+            </Card>
+          </Box>
+          <Spacer />
+          <Box width="100%">
+          <ScreenShots ids={id} />
+          </Box>
+        </Flex>
+        <h1>{gameDetail.name}</h1>
+        <p>Released: {gameDetail.released}</p>
+        <p>Metacritic Score: {gameDetail.metacritic}</p>
+        <p>{gameDetail.description}</p>
+        <p>
+          Website:{" "}
+          <a
+            href={gameDetail.website}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {gameDetail.website}
+          </a>
+        </p>
+        <p>
+          Platforms:{" "}
+          {gameDetail.platforms
+            .map((platform) => platform.platform.name)
+            .join(", ")}
+        </p>
+        {/* <ScreenShots ids={id} /> */}
+        {/* <Achievments ids={id}/> */}
+        {/* <Stores ids={id}/> */}
       </div>
     </div>
   );
