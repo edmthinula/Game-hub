@@ -1,12 +1,19 @@
 .container {
   width: 100%;
-  margin: 0 0 auto auto;
+  margin: 0 0 30px auto;
   position: relative;
   list-style: none;
   padding: 0;
   max-width: 800px; 
+  
+  
 }
-
+@media (max-width: 1280px) {
+  .container {
+    max-width: none;
+    margin-top: 30px;
+  }
+}
 .slide > div {
   display: flex;
   align-items: center;

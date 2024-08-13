@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import {
   Image,
   Card,
@@ -12,6 +14,7 @@ import {
   Divider,
   Heading,
   Text,
+  Center,
 } from "@chakra-ui/react";
 
 interface AchievmentsProps {
@@ -41,17 +44,39 @@ function Achievments({ ids }: AchievmentsProps) {
     fetchAchievments();
   }, [ids]);
 
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
   return (
     <>
       <h2>Achivements</h2>
+      <Carousel responsive={responsive}>
       {achi.map((achi) => (
-        <Card maxW="sm">
+        <Card maxW="lg" width='80%' key={achi.id}>
           <CardBody>
+          <Center>
             <Image
               src={achi.image}
               alt={achi.name}
               borderRadius="lg"
             />
+          </Center>
             <Stack mt="6" spacing="3">
               <Heading size="md">{achi.name}</Heading>
               <Text>
@@ -59,9 +84,10 @@ function Achievments({ ids }: AchievmentsProps) {
               </Text>
             </Stack>
           </CardBody>
-         
         </Card>
       ))}
+</Carousel>
+
     </>
   );
 }

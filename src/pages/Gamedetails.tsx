@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Container } from "@chakra-ui/react";
 import {
   Box,
   Flex,
@@ -54,6 +55,12 @@ const GameDetail: React.FC = () => {
   if (error) return <div>Error: {error}</div>;
   if (!gameDetail) return <div>No data available</div>;
 
+  const formattedDescription = gameDetail.description
+  .split("Español")[0] // Split and take only the English part
+  .replace(/<br\s*\/?>/gi, "") // Remove all <br/> tags
+  .replace(/<\/?p>/gi, "") // Remove all <p> and </p> tags
+  .split("\n");
+
   return (
     <div>
       <div
@@ -63,71 +70,76 @@ const GameDetail: React.FC = () => {
         }}
       />
       <div className="details">
-        <Flex display={{ md: "flex" }}  align="center"  width="100%">
-          <Box>
-            <Card>
+        <Flex display={{ xl: "flex" }} align="center" width="100%">
+          <Box boxShadow="dark-lg" marginTop='auto' marginBottom='auto'>
+            <Card >
               <CardHeader>
-                <Heading size="md">Client Report</Heading>
+                <Heading size="lg">{gameDetail.name}</Heading>
               </CardHeader>
-
               <CardBody>
                 <Stack divider={<StackDivider />} spacing="4">
                   <Box>
-                    <Heading size="xs" textTransform="uppercase">
-                      Summary
+                    <Heading size="md" textTransform="uppercase">
+                      Released: {gameDetail.released}
                     </Heading>
-                    <Text pt="2" fontSize="sm">
-                      View a summary of all your clients over the last month.
-                    </Text>
                   </Box>
                   <Box>
-                    <Heading size="xs" textTransform="uppercase">
-                      Overview
+                    <Heading size="md" textTransform="uppercase">
+                      Metacritic Score: {gameDetail.metacritic}
                     </Heading>
-                    <Text pt="2" fontSize="sm">
-                      Check out the overview of your clients.
-                    </Text>
                   </Box>
                   <Box>
-                    <Heading size="xs" textTransform="uppercase">
-                      Analysis
+                    <Heading size="md" textTransform="uppercase">
+                      Website: <Text></Text>
+                      <a
+                        href={gameDetail.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {gameDetail.website}
+                      </a>
                     </Heading>
-                    <Text pt="2" fontSize="sm">
-                      See a detailed analysis of all your business clients.
-                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading size="md" textTransform="uppercase">
+                      Platforms:{" "}
+                      <Text>
+                        {gameDetail.platforms
+                          .map((platform) => platform.platform.name)
+                          .join(", ")}
+                      </Text>
+                    </Heading>
                   </Box>
                 </Stack>
               </CardBody>
             </Card>
           </Box>
           <Spacer />
-          <Box width="100%">
-          <ScreenShots ids={id} />
+          <Box width="100%" borderRadius="20px">
+            <ScreenShots ids={id} />
           </Box>
         </Flex>
-        <h1>{gameDetail.name}</h1>
-        <p>Released: {gameDetail.released}</p>
-        <p>Metacritic Score: {gameDetail.metacritic}</p>
-        <p>{gameDetail.description}</p>
-        <p>
-          Website:{" "}
-          <a
-            href={gameDetail.website}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {gameDetail.website}
-          </a>
-        </p>
-        <p>
-          Platforms:{" "}
-          {gameDetail.platforms
-            .map((platform) => platform.platform.name)
-            .join(", ")}
-        </p>
-        {/* <ScreenShots ids={id} /> */}
-        {/* <Achievments ids={id}/> */}
-        {/* <Stores ids={id}/> */}
+        <Box
+          boxShadow="outline"
+          p="6"
+          rounded="md"
+          color="white"
+          fontWeight="bold"
+          borderRadius="md"
+          bgGradient="linear(to-r, teal.500, green.500)"
+          _hover={{
+            bgGradient: "linear(to-r, red.500, yellow.500)",
+          }}
+        >
+          {formattedDescription.map((paragraph, index) => (
+            <Text key={index} mb={4}>
+              {paragraph}
+            </Text>
+          ))}
+        </Box>
+
+        <Achievments ids={id}/>
+        <Stores ids={id}/>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Button, ButtonGroup, SimpleGrid } from "@chakra-ui/react";
 
 interface StoresProps {
   ids: string | undefined;
@@ -41,7 +42,7 @@ function Stores({ ids }: StoresProps) {
         return response.data.name;
       } catch (err) {
         setError((err as Error).message);
-        return 'Unknown Store';
+        return "Unknown Store";
       }
     };
 
@@ -57,13 +58,18 @@ function Stores({ ids }: StoresProps) {
   return (
     <>
       <h1>Where to buy</h1>
+      <SimpleGrid columns={3} spacingX='40px' spacingY='20px'>
+
       {wherebuy.map((store) => (
         <div key={store.store_id}>
-          <p>Store ID: {store.store_id}</p>
-          <p>Store Name: {store.name}</p>
-          <p>URL: <a href={store.url} target="_blank" rel="noopener noreferrer">{store.url}</a></p>
+          <a href={store.url} target="_blank" rel="noopener noreferrer">
+            <Button colorScheme="teal" size="md">
+              {store.name}
+            </Button>
+          </a>
         </div>
       ))}
+      </SimpleGrid>
     </>
   );
 }
