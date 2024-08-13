@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import ScreenShots from '../components/Gamedetails/ScreenShots';
+import Achievments from '../components/Gamedetails/Achievments';
+import Stores from '../components/Gamedetails/Stores';
 
 interface GameDetail {
   id: number;
@@ -36,17 +39,36 @@ const GameDetail: React.FC = () => {
 
     fetchGameDetail();
   }, [id]);
-
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!gameDetail) return <div>No data available</div>;
 
-  console.log(gameDetail); // Log the game details to the console
-
   return (
     <div>
+    <div 
+    style={{
+      backgroundImage: `url(${gameDetail.background_image})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      height: '100vh',
+      width: '100vw',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      zIndex: -1,
+      filter: 'brightness(0.5) blur(5px)',
+    }}
+    />
+      <div
+      style={{
+        position: 'relative',
+        zIndex: 1,
+        padding: '20px',
+        color: 'white',
+      }}
+      >
       <h1>{gameDetail.name}</h1>
-      <img src={gameDetail.background_image} alt={gameDetail.name} />
+      {/* <img src={gameDetail.background_image} alt={gameDetail.name} /> */}
       <p>Released: {gameDetail.released}</p>
       <p>Metacritic Score: {gameDetail.metacritic}</p>
       <p>{gameDetail.description}</p>
@@ -60,6 +82,10 @@ const GameDetail: React.FC = () => {
         Platforms:{" "}
         {gameDetail.platforms.map((platform) => platform.platform.name).join(", ")}
       </p>
+    {/* <ScreenShots ids={id}/> */}
+    {/* <Achievments ids={id}/> */}
+    {/* <Stores ids={id}/> */}
+      </div>
     </div>
   );
 };
