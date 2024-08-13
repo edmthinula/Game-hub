@@ -48,46 +48,39 @@ function Achievments({ ids }: AchievmentsProps) {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 5
+      items: 5,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3
+      items: 3,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2
+      items: 2,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
+      items: 1,
+    },
   };
   return (
     <>
       <h2>Achivements</h2>
       <Carousel responsive={responsive}>
-      {achi.map((achi) => (
-        <Card maxW="lg" width='80%' key={achi.id}>
-          <CardBody>
-          <Center>
-            <Image
-              src={achi.image}
-              alt={achi.name}
-              borderRadius="lg"
-            />
-          </Center>
-            <Stack mt="6" spacing="3">
-              <Heading size="md">{achi.name}</Heading>
-              <Text>
-               {achi.description}
-              </Text>
-            </Stack>
-          </CardBody>
-        </Card>
-      ))}
-</Carousel>
-
+        {achi.map((achi) => (
+          <Card maxW="lg" width="80%" key={achi.id}>
+            <CardBody>
+              <Center>
+                <Image src={achi.image} alt={achi.name} borderRadius="lg" />
+              </Center>
+              <Stack mt="6" spacing="3">
+                <Heading size="md">{achi.name}</Heading>
+                <Text>{achi.description}</Text>
+              </Stack>
+            </CardBody>
+          </Card>
+        ))}
+      </Carousel>
     </>
   );
 }

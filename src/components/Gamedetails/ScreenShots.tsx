@@ -1,10 +1,10 @@
 import { Fade } from "react-slideshow-image";
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "react-slideshow-image/dist/styles.css";
 import styles from "./Slider.module.css";
 import { Center } from "@chakra-ui/react";
 import { Button, Stack } from "@chakra-ui/react";
-import axios from 'axios';
+import axios from "axios";
 
 interface Screenshot {
   id: number;
@@ -75,21 +75,18 @@ function ScreenShots({ ids }: ScreenshotProps) {
           position="absolute"
           zIndex={10}
         >
-        {screenshots.map((_, index) => (
-           <Button
-           key={index}
-           colorScheme={index === currentslide ? 'teal':'purple'}
-           size="xs"
-           borderRadius="50%"
-           onClick={() => handleButtonClick(index)}
-         />
-          
+          {screenshots.map((_, index) => (
+            <Button
+              key={index}
+              colorScheme={index === currentslide ? "teal" : "purple"}
+              size="xs"
+              borderRadius="50%"
+              onClick={() => handleButtonClick(index)}
+            />
           ))}
         </Stack>
       </Center>
     </div>
   );
 }
-  export default ScreenShots;
-  
-
+export default ScreenShots;

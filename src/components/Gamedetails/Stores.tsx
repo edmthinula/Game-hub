@@ -58,17 +58,16 @@ function Stores({ ids }: StoresProps) {
   return (
     <>
       <h1>Where to buy</h1>
-      <SimpleGrid columns={3} spacingX='40px' spacingY='20px'>
-
-      {wherebuy.map((store) => (
-        <div key={store.store_id}>
-          <a href={store.url} target="_blank" rel="noopener noreferrer">
-            <Button colorScheme="teal" size="md">
-              {store.name}
-            </Button>
-          </a>
-        </div>
-      ))}
+      <SimpleGrid columns={3} spacingX="40px" spacingY="20px">
+        {wherebuy.map((store) => (
+          <div key={store.store_id}>
+            <a href={store.url} target="_blank" rel="noopener noreferrer">
+              <Button colorScheme="teal" size="md">
+                {store.name}
+              </Button>
+            </a>
+          </div>
+        ))}
       </SimpleGrid>
     </>
   );
