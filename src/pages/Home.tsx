@@ -20,6 +20,7 @@ import { HamburgerIcon } from '@chakra-ui/icons'
 import NavBar from "../components/NavBar";
 import GameGrid from "../components/home/GameGrid";
 import GenereList from "../components/home/GenereList";
+import Landingslideshow from "../components/Gamedetails/Landingslideshow";
 import { Genere } from "../hooks/useGenere";
 import { useRef, useState } from "react";
 import { PlatformSelector } from "../components/home/PlatformSelector";
@@ -43,14 +44,17 @@ function App() {
   return (
     <Grid
       templateAreas={{
-        base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`,
+        base: `"nav" "slideshow" "main"`,
+        lg: `"nav nav" " aside slideshow" "aside main"`,
       }}
     >
       <GridItem area="nav">
         <NavBar
           onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
         />
+      </GridItem>
+      <GridItem area="slideshow">
+        <Landingslideshow />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5} marginBottom={5}>
@@ -93,9 +97,6 @@ function App() {
             </DrawerBody>
           </DrawerContent>
         </Drawer>
-
-
-
           </Show>
           </Flex>
           <Flex  marginBottom={5}>
