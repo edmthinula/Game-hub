@@ -1,12 +1,5 @@
-import {
-  Box,
-  Button,
-  Spacer,
-  Flex,
-  Grid,
-  GridItem,
-  Show,
-} from "@chakra-ui/react";
+import { Box, Button, Spacer, Grid, GridItem, Show } from "@chakra-ui/react";
+import { Flex, useBreakpointValue } from "@chakra-ui/react";
 import {
   Drawer,
   DrawerBody,
@@ -15,8 +8,8 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-} from '@chakra-ui/react'
-import { HamburgerIcon } from '@chakra-ui/icons'
+} from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
 import NavBar from "../components/NavBar";
 import GameGrid from "../components/home/GameGrid";
 import GenereList from "../components/home/GenereList";
@@ -38,85 +31,118 @@ export interface GameQuery {
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
+  const flexDirection = useBreakpointValue<"row" | "column">({
+    base: "column",
+    lg: "row",
+  });
 
   return (
-    <Grid
-      templateAreas={{
-        base: `"nav" "slideshow" "main"`,
-        lg: `"nav nav" " aside slideshow" "aside main"`,
-      }}
-    >
-      <GridItem area="nav">
+    <Flex direction="column">
+      {/* NavBar */}
+      <Box>
         <NavBar
           onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
         />
-      </GridItem>
-      <GridItem area="slideshow">
-        <Landingslideshow />
-      </GridItem>
-      <Show above="lg">
-        <GridItem area="aside" paddingX={5} marginBottom={5}>
-          <GenereList
-            selectedGenre={gameQuery.genere}
-            onSelectGenre={(genere: Genere) =>
-              setGameQuery({ ...gameQuery, genere })
-            }
-          />
-        </GridItem>
-      </Show>
-      <GridItem area="main">
-        <Box paddingLeft={2}>
-          <Flex>
-          <GameHeading gameQuery={gameQuery}/>
-          <Spacer/>
-          <Show breakpoint='(max-width: 977px)'>
+      </Box>
 
-          <Button ref={btnRef} colorScheme='teal' onClick={onOpen} marginRight={4}>
-          <HamburgerIcon/>
-        </Button>
-        <Drawer
-          isOpen={isOpen}
-          placement='right'
-          onClose={onClose}
-          finalFocusRef={btnRef}
-        >
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerCloseButton />
-            <DrawerHeader><GameHeading gameQuery={gameQuery}/></DrawerHeader>
-  
-            <DrawerBody>
+      {/* Slideshow */}
+      <Box mt={4}>
+        <Landingslideshow />
+      </Box>
+
+      {/* Main Content Area */}
+      <Flex
+        direction={flexDirection} // Stack items vertically on smaller screens
+        mt={5}
+      >
+        {/* Sidebar (only visible on large screens) */}
+        <Show above="lg">
+          <Box flex="1" paddingX={5} marginBottom={5}>
             <GenereList
-            selectedGenre={gameQuery.genere}
-            onSelectGenre={(genere: Genere) =>
-              setGameQuery({ ...gameQuery, genere })
-            }
-          />
-            </DrawerBody>
-          </DrawerContent>
-        </Drawer>
-          </Show>
+              selectedGenre={gameQuery.genere}
+              onSelectGenre={(genere: Genere) =>
+                setGameQuery({ ...gameQuery, genere })
+              }
+            />
+          </Box>
+        </Show>
+
+        {/* Main Content (GameGrid) */}
+        <Box flex="3" paddingLeft={2}>
+          {/* Heading and Controls */}
+          <Flex
+            justifyContent="space-between"
+            alignItems="center"
+            marginBottom={5}
+          >
+            <GameHeading gameQuery={gameQuery} />
+
+            <Show below="lg">
+              <Button
+                ref={btnRef}
+                colorScheme="teal"
+                onClick={onOpen}
+                marginRight={4}
+              >
+                <HamburgerIcon />
+              </Button>
+            </Show>
           </Flex>
-          <Flex  marginBottom={5}>
-            <Box marginRight={5}>
+
+          {/* Platform Selector and Sort Options */}
+          <Flex marginBottom={5} direction={{ base: "column", lg: "row" }}>
+            <Flex marginRight={5} direction={{ base: "row", lg: "row" }}>
+              <Box>
               <PlatformSelector
                 selectedPlatform={gameQuery.platform}
                 onselectPlatform={(platform) =>
                   setGameQuery({ ...gameQuery, platform })
                 }
               />
-            </Box>
-            <SortSelector
+              </Box>
+              <Box marginLeft={5}>
+              <SortSelector
               sortOrder={gameQuery.sort}
-              onselecetSortorder={(sort) => setGameQuery({ ...gameQuery, sort })}
+              onselecetSortorder={(sort) =>
+                setGameQuery({ ...gameQuery, sort })
+              }
             />
+              </Box>
+            </Flex>
+
           </Flex>
+
+          {/* GameGrid */}
+          <GameGrid gameQuery={gameQuery} />
         </Box>
-        <GameGrid gameQuery={gameQuery} />
-      </GridItem>
-    </Grid>
+      </Flex>
+
+      {/* Drawer for Genre List on Smaller Screens */}
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>
+            <GameHeading gameQuery={gameQuery} />
+          </DrawerHeader>
+          <DrawerBody>
+            <GenereList
+              selectedGenre={gameQuery.genere}
+              onSelectGenre={(genere: Genere) =>
+                setGameQuery({ ...gameQuery, genere })
+              }
+            />
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </Flex>
   );
 }
 
