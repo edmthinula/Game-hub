@@ -17,7 +17,8 @@ const slideshow: Slides[] = [
     pc: ghost1,
     mobile: mob1,
     more: "481913",
-    trailer: "https://youtu.be/pnSsgRJmsCc?si=jzfzfjx0Asoxg71D",
+    trailer:
+      '<iframe width="560" height="315" src="https://www.youtube.com/embed/pnSsgRJmsCc?si=wxmEQglrVcnx2hgp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
   },
   {
     id: 2,
@@ -25,7 +26,7 @@ const slideshow: Slides[] = [
     pc: ghost2,
     mobile: mob2,
     more: "983203",
-    trailer: "https://youtu.be/O_-4XH79B7U?si=I8rmFU2Avf-ayoYO",
+    trailer: '<iframe width="560" height="315" src="https://www.youtube.com/embed/O_-4XH79B7U?si=s2Jogz0L32HW38nm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
   },
   {
     id: 3,
@@ -33,7 +34,7 @@ const slideshow: Slides[] = [
     pc: ghost1,
     mobile: mob1,
     more: "398401",
-    trailer: "https://youtu.be/3VYGOkMnGCE?si=9HFXFYXcStgTvEf9",
+    trailer: '<iframe width="560" height="315" src="https://www.youtube.com/embed/3VYGOkMnGCE?si=yxUcY0NNyS6oEdX4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
   },
   {
     id: 4,
@@ -41,7 +42,7 @@ const slideshow: Slides[] = [
     pc: ghost2,
     mobile: mob2,
     more: "41494",
-    trailer: "https://youtu.be/Ugb80d5lxEM?si=ju3QDA-OCMqDgj4m",
+    trailer: '<iframe width="560" height="315" src="https://www.youtube.com/embed/Ugb80d5lxEM?si=fttAJvyxYyGHTXOA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
   },
   {
     id: 5,
@@ -49,7 +50,7 @@ const slideshow: Slides[] = [
     pc: ghost1,
     mobile: mob1,
     more: "802435",
-    trailer: "https://youtu.be/KOhs9ZLImgE?si=u9ksiru0ZXiQorr-",
+    trailer: '<iframe width="560" height="315" src="https://www.youtube.com/embed/KOhs9ZLImgE?si=JfQ7fd2xDDsDAr2s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
   },
   {
     id: 6,
@@ -57,7 +58,7 @@ const slideshow: Slides[] = [
     pc: ghost2,
     mobile: mob2,
     more: "977470",
-    trailer: "https://youtu.be/JugxpebuS_E?si=6t1h26VVZZ6DGsVM",
+    trailer: '<iframe width="560" height="315" src="https://www.youtube.com/embed/JugxpebuS_E?si=A2COoHwsbaPHdmJ2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
   },
   {
     id: 7,
@@ -65,8 +66,8 @@ const slideshow: Slides[] = [
     pc: ghost1,
     mobile: mob1,
     more: "638650",
-    trailer: "https://youtu.be/A5gVt028Hww?si=K1N8YrxpLlWnqYGh",
+    trailer: '<iframe width="560" height="315" src="https://www.youtube.com/embed/A5gVt028Hww?si=exFfNU0EONN0N1yb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
   },
 ];
 
-export default slideshow
+export default slideshow;
