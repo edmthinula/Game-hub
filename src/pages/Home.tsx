@@ -13,7 +13,8 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import NavBar from "../components/NavBar";
 import GameGrid from "../components/home/GameGrid";
 import GenereList from "../components/home/GenereList";
-import Landingslideshow from "../components/Gamedetails/Landingslideshow";
+import Landingslideshow from "../components/home/Landingslideshow";
+import Fourgame from "../components/home/Fourgame";
 import { Genere } from "../hooks/useGenere";
 import { useRef, useState } from "react";
 import { PlatformSelector } from "../components/home/PlatformSelector";
@@ -51,13 +52,15 @@ function App() {
       <Box mt={4}>
         <Landingslideshow />
       </Box>
+      <Box mt={4} display="flex" justifyContent="center"  zIndex={10} top='90vh'>
+        <Fourgame />
+      </Box>
 
-      {/* Main Content Area */}
       <Flex
         direction={flexDirection} // Stack items vertically on smaller screens
         mt={5}
       >
-        {/* Sidebar (only visible on large screens) */}
+
         <Show above="lg">
           <Box flex="1" paddingX={5} marginBottom={5}>
             <GenereList
@@ -95,23 +98,22 @@ function App() {
           <Flex marginBottom={5} direction={{ base: "column", lg: "row" }}>
             <Flex marginRight={5} direction={{ base: "row", lg: "row" }}>
               <Box>
-              <PlatformSelector
-                selectedPlatform={gameQuery.platform}
-                onselectPlatform={(platform) =>
-                  setGameQuery({ ...gameQuery, platform })
-                }
-              />
+                <PlatformSelector
+                  selectedPlatform={gameQuery.platform}
+                  onselectPlatform={(platform) =>
+                    setGameQuery({ ...gameQuery, platform })
+                  }
+                />
               </Box>
               <Box marginLeft={5}>
-              <SortSelector
-              sortOrder={gameQuery.sort}
-              onselecetSortorder={(sort) =>
-                setGameQuery({ ...gameQuery, sort })
-              }
-            />
+                <SortSelector
+                  sortOrder={gameQuery.sort}
+                  onselecetSortorder={(sort) =>
+                    setGameQuery({ ...gameQuery, sort })
+                  }
+                />
               </Box>
             </Flex>
-
           </Flex>
 
           {/* GameGrid */}
