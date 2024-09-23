@@ -49,7 +49,7 @@ function App() {
       </Box>
 
       {/* Slideshow */}
-      <Box mt={4}>
+      <Box mt={4} marginBottom='-120px'>
         <Landingslideshow />
       </Box>
       <Box mt={4} display="flex" justifyContent="center"  zIndex={10} top='90vh'>

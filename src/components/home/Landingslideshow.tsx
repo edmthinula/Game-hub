@@ -55,10 +55,12 @@ function Landingslideshow() {
           <div className={styles.slide} key={slides.id}>
             <div
               style={{
-                backgroundImage: `url(${slides.pc})`,
-                backgroundSize: "cover",
-                height: "100vh", // adjust based on your design
+                height: "100vh", 
                 width: "100vw",
+                background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 2)), url(${slides.pc})`,
+                backgroundSize: "100% 200px, cover",
+                backgroundPosition: "bottom, center",
+                backgroundRepeat: "no-repeat, no-repeat",
               }}
             >
               <Heading
@@ -107,7 +109,7 @@ function Landingslideshow() {
         <Stack
           spacing={4}
           direction="row"
-          top="94%"
+          top="89%"
           position="absolute"
           zIndex={10}
         >

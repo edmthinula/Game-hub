@@ -17,7 +17,11 @@ import {
 } from "@chakra-ui/react";
 import GODofwar from "../../images/Ragnarök-culture-ar1qdh.webp";
 import star5 from "../../images/5star.png";
-import last2 from '../../images/last2.jpg'
+import last2 from '../../images/last2.jpg';
+import spidy from '../../images/spiderman.jpg';
+import creed from '../../images/assasins.jpg';
+import horizon from '../../images/horizon.jpg'
+
 function Fourgame() {
   return (
     <div>
@@ -31,13 +35,13 @@ function Fourgame() {
                     height="25vh"
                     width="45vw"
                     objectFit="cover"
-                    src={GODofwar}
+                    src={spidy}
                     alt="God of war"
                   />
                 </Box>
                 <Box  maxW="35vw">
-                <Heading marginTop='1vh' fontWeight={100} size='lg'>Horizon</Heading>
-                <Heading  marginBottom='4vh'>Forbidden West</Heading>
+                <Heading marginTop='1vh' fontWeight={100} size='lg'>Marvel's</Heading>
+                <Heading  marginBottom='4vh'>Spider Man 2 </Heading>
                   Embark on an epic and heartfelt journey as Kratos and Atreus
                   struggle with holding on and letting go From Santa Monica
                   Studio comes the sequel to the critically acclaimed God of War
@@ -72,8 +76,8 @@ function Fourgame() {
             <Center>
               <Stack direction={["column", "row"]} spacing="3vw">
                 <Box  maxW="35vw">
-                <Heading marginTop='1vh' fontWeight={100} size='lg'>Horizon</Heading>
-                <Heading  marginBottom='4vh'>Forbidden West</Heading>
+                <Heading marginTop='1vh' fontWeight={100} size='lg'>Assassin's Creed</Heading>
+                <Heading  marginBottom='4vh'>Mirage</Heading>
                   Embark on an epic and heartfelt journey as Kratos and Atreus
                   struggle with holding on and letting go From Santa Monica
                   Studio comes the sequel to the critically acclaimed God of War
@@ -107,7 +111,7 @@ function Fourgame() {
                     height="25vh"
                     width="45vw"
                     objectFit="cover"
-                    src={GODofwar}
+                    src={creed}
                     alt="God of war"
                   />
                 </Box>
@@ -121,7 +125,7 @@ function Fourgame() {
                     height="25vh"
                     width="45vw"
                     objectFit="cover"
-                    src={GODofwar}
+                    src={horizon}
                     alt="God of war"
                   />
                 </Box>
