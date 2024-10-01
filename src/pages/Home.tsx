@@ -1,4 +1,4 @@
-import { Box, Button, Spacer, Grid, GridItem, Show } from "@chakra-ui/react";
+import { Box, Button,Show } from "@chakra-ui/react";
 import { Flex, useBreakpointValue } from "@chakra-ui/react";
 import {
   Drawer,
@@ -44,6 +44,8 @@ function App() {
       {/* NavBar */}
       <Box>
         <NavBar
+          gameQuery={gameQuery}
+          setGameQuery={setGameQuery}
           onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
         />
       </Box>
@@ -61,7 +63,7 @@ function App() {
         mt={5}
       >
 
-        <Show above="lg">
+        {/* <Show above="lg">
           <Box flex="1" paddingX={5} marginBottom={5}>
             <GenereList
               selectedGenre={gameQuery.genere}
@@ -70,7 +72,7 @@ function App() {
               }
             />
           </Box>
-        </Show>
+        </Show> */}
 
         {/* Main Content (GameGrid) */}
         <Box flex="3" paddingLeft={2}>

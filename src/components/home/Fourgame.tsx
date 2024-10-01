@@ -20,7 +20,8 @@ import star5 from "../../images/5star.png";
 import last2 from '../../images/last2.jpg';
 import spidy from '../../images/spiderman.jpg';
 import creed from '../../images/assasins.jpg';
-import horizon from '../../images/horizon.jpg'
+import horizon from '../../images/horizon.jpg';
+import { Link } from "react-router-dom";
 
 function Fourgame() {
   return (
