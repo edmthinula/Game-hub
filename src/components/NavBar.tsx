@@ -42,7 +42,7 @@ const NavBar = ({ onSearch }: Props) => {
       <SearchInput onSearch={onSearch} />
       <Drawer
         isOpen={isOpen}
-        placement="right"
+        placement="left"
         onClose={onClose}
         finalFocusRef={btnRef}
       >

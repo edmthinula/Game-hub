@@ -48,9 +48,11 @@ function Fourgame() {
                   Studio comes the sequel to the critically acclaimed God of War
                   (2018).
                   <Flex marginTop="1vh">
+                    <Link to={'/game/662316'}>
                     <Button marginTop='0.5vh' colorScheme="teal" variant="outline">
-                      Button
+                      More
                     </Button>
+                    </Link>
                     <Spacer />
                     <Box                      
                       marginBottom={0}
@@ -84,9 +86,11 @@ function Fourgame() {
                   Studio comes the sequel to the critically acclaimed God of War
                   (2018).
                   <Flex marginTop="1vh">
+                    <Link to='/game/845261'>
                     <Button marginTop='0.5vh' colorScheme="teal" variant="outline">
-                      Button
+                      More
                     </Button>
+                    </Link>
                     <Spacer />
                     <Box                      
                       marginBottom={0}
@@ -138,9 +142,11 @@ function Fourgame() {
                   Studio comes the sequel to the critically acclaimed God of War
                   (2018).
                   <Flex marginTop="1vh">
+                    <Link to='/game/966906'>
                     <Button marginTop='0.5vh' colorScheme="teal" variant="outline">
-                      Button
+                      More
                     </Button>
+                    </Link>
                     <Spacer />
                     <Box                      
                       marginBottom={0}
@@ -173,9 +179,11 @@ function Fourgame() {
                   Studio comes the sequel to the critically acclaimed God of War
                   (2018).
                   <Flex marginTop="1vh">
+                  <Link to='/game/51325'>
                     <Button marginTop='0.5vh' colorScheme="teal" variant="outline">
-                      Button
+                      More
                     </Button>
+                    </Link>
                     <Spacer />
                     <Box                      
                       marginBottom={0}

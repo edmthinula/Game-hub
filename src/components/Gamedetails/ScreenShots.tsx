@@ -2,8 +2,6 @@ import { Fade } from "react-slideshow-image";
 import { useState, useEffect, useRef } from "react";
 import "react-slideshow-image/dist/styles.css";
 import styles from "./Slider.module.css";
-import { Center } from "@chakra-ui/react";
-import { Button, Stack } from "@chakra-ui/react";
 import axios from "axios";
 
 interface Screenshot {
@@ -18,7 +16,6 @@ interface ScreenshotProps {
 function ScreenShots({ ids }: ScreenshotProps) {
   const [screenshots, setScreenshots] = useState<Screenshot[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [currentslide, setCurrentSlide] = useState(0);
   const fadeRef = useRef<any>(null);
 
   useEffect(() => {
@@ -36,10 +33,7 @@ function ScreenShots({ ids }: ScreenshotProps) {
     fetchScreenshot();
   }, [ids]);
 
-  const handleButtonClick = (index: number) => {
-    setCurrentSlide(index);
-    fadeRef.current.goTo(index);
-  };
+
 
   return (
     <div className={styles.container}>
@@ -50,9 +44,7 @@ function ScreenShots({ ids }: ScreenshotProps) {
         autoplay={true}
         duration={5000}
         pauseOnHover={false}
-        onChange={(oldindex, newindex) => {
-          setCurrentSlide(newindex);
-        }}
+        arrows={false}
       >
         {screenshots.map((screenshot) => (
           <div className={styles.slide} key={screenshot.id}>
@@ -60,32 +52,14 @@ function ScreenShots({ ids }: ScreenshotProps) {
               style={{
                 backgroundImage: `url(${screenshot.image})`,
                 backgroundSize: "cover",
-                height: "500px", // adjust based on your design
+                height: "100vh",
                 width: "100%",
               }}
             ></div>
           </div>
         ))}
       </Fade>
-      <Center>
-        <Stack
-          spacing={4}
-          direction="row"
-          top="94%"
-          position="absolute"
-          zIndex={10}
-        >
-          {screenshots.map((_, index) => (
-            <Button
-              key={index}
-              colorScheme={index === currentslide ? "teal" : "purple"}
-              size="xs"
-              borderRadius="50%"
-              onClick={() => handleButtonClick(index)}
-            />
-          ))}
-        </Stack>
-      </Center>
+
     </div>
   );
 }
