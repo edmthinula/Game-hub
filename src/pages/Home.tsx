@@ -84,7 +84,7 @@ function App() {
           >
             <GameHeading gameQuery={gameQuery} />
 
-            <Show below="lg">
+            {/* <Show below="lg">
               <Button
                 ref={btnRef}
                 colorScheme="teal"
@@ -93,7 +93,7 @@ function App() {
               >
                 <HamburgerIcon />
               </Button>
-            </Show>
+            </Show> */}
           </Flex>
 
           {/* Platform Selector and Sort Options */}
