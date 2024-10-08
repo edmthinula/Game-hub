@@ -52,7 +52,7 @@ function Achievments({ ids }: AchievmentsProps) {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 3
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -65,7 +65,6 @@ function Achievments({ ids }: AchievmentsProps) {
   };
   return (
     <>
-      <h2>Achivements</h2>
       <Carousel responsive={responsive}>
         {achi.map((achi) => (
           <Card maxW="lg" width="80%" key={achi.id}>

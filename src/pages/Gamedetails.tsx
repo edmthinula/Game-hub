@@ -68,12 +68,6 @@ const GameDetail: React.FC = () => {
   return (
     <div>
       <div
-        className="fixedimg"
-        style={{
-          backgroundImage: `url(${gameDetail.background_image})`,
-        }}
-      />
-      <div
         style={{
           position: "absolute",
           zIndex: 10,
@@ -196,6 +190,12 @@ const GameDetail: React.FC = () => {
             </CardBody>
           </Card>
         </Box> */}
+        <Center>
+        <Heading as='h2' size='3xl'>
+          Achievments
+        </Heading>
+        </Center>
+          <Achievments ids={id} />
         <Box
           boxShadow="outline"
           p="6"
@@ -214,7 +214,6 @@ const GameDetail: React.FC = () => {
             </Text>
           ))}
         </Box>
-        <Achievments ids={id} />
         <Stores ids={id} />
       </div>
     </div>
