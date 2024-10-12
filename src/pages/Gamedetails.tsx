@@ -8,6 +8,7 @@ import {
   Flex,
   Heading,
   Hide,
+  HStack,
   Show,
   Spacer,
   Stack,
@@ -191,14 +192,16 @@ const GameDetail: React.FC = () => {
           </Card>
         </Box> */}
         <Center>
-        <Heading as='h2' size='3xl'>
+        <Heading as='h2' size='3xl' marginBottom={7} >
           Achievments
         </Heading>
         </Center>
           <Achievments ids={id} />
+        
         <Box
           boxShadow="outline"
           p="6"
+          marginTop={10}
           rounded="md"
           color="white"
           fontWeight="bold"
@@ -208,11 +211,14 @@ const GameDetail: React.FC = () => {
             bgGradient: "linear(to-r, red.500, yellow.500)",
           }}
         >
+          <HStack>
+
           {formattedDescription.map((paragraph, index) => (
             <Text key={index} mb={4}>
               {paragraph}
             </Text>
           ))}
+          </HStack>
         </Box>
         <Stores ids={id} />
       </div>

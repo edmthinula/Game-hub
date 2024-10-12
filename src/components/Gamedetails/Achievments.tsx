@@ -52,7 +52,7 @@ function Achievments({ ids }: AchievmentsProps) {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3
+      items: 3,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -67,12 +67,56 @@ function Achievments({ ids }: AchievmentsProps) {
     <>
       <Carousel responsive={responsive}>
         {achi.map((achi) => (
-          <Card maxW="lg" width="80%" key={achi.id}>
-            <CardBody>
+          <Card
+          
+            maxW="lg"
+            height="100%"
+            width="80%"
+            key={achi.id}
+            position="relative"
+            overflow="hidden"
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage: `url(${achi.image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                filter: "blur(8px)", // Adjust the blur amount as needed
+                zIndex: 0,
+              }}
+            />
+            <CardBody
+              style={{
+                position: "relative",
+                zIndex: 1,
+                background:
+                  "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 50%)",
+                color: "white", // Set text color to white for better contrast
+              }}
+            >
               <Center>
-                <Image src={achi.image} alt={achi.name} borderRadius="lg" />
+                <Image
+                  src={achi.image}
+                  alt={achi.name}
+                  borderRadius="lg"
+                  boxShadow="0 4px 8px rgba(0,0,0,0.2)" // Optional: adds a subtle shadow to the image
+                />
               </Center>
-              <Stack mt="6" spacing="3">
+              <Stack
+                mt="6"
+                spacing="3"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%)",
+                  padding: "1rem",
+                  borderRadius: "0.5rem",
+                }}
+              >
                 <Heading size="md">{achi.name}</Heading>
                 <Text>{achi.description}</Text>
               </Stack>
