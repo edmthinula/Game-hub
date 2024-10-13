@@ -16,6 +16,8 @@ import {
   Text,
   Wrap,
   WrapItem,
+  Image,
+  VStack,
 } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import ScreenShots from "../components/Gamedetails/ScreenShots";
@@ -66,6 +68,30 @@ const GameDetail: React.FC = () => {
     .replace(/<\/?p>/gi, "") // Remove all <p> and </p> tags
     .split("\n");
 
+  const formattedlink = gameDetail.website
+    .replace(/^https?:\/\//i, "") // Remove http:// or https://
+    .replace(/^www\./i, "")
+    .replace(/\.com(.*)$/, ".com");
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const releasedDate = gameDetail.released.replace(/-/g, " ");
+  const [year, month, day] = releasedDate.split(" ");
+  const monthName = months[parseInt(month) - 1];
+  const formattedDay = parseInt(day).toString();
   return (
     <div>
       <div
@@ -80,7 +106,7 @@ const GameDetail: React.FC = () => {
         <Heading as="h2" size="3xl">
           {gameDetail.name}
         </Heading>
-        <Button top='10vh' colorScheme="yellow" borderRadius="20px">
+        <Button top="10vh" colorScheme="yellow" borderRadius="20px">
           Purchase
         </Button>
         <Hide below="802px">
@@ -95,11 +121,11 @@ const GameDetail: React.FC = () => {
           >
             <WrapItem
               maxW="sm"
-              border="10px solid #ddd" 
-              borderRadius="md" 
-              p={4} 
-              justifyContent="center" 
-              alignItems="center" 
+              border="10px solid #ddd"
+              borderRadius="md"
+              p={4}
+              justifyContent="center"
+              alignItems="center"
             >
               <Center>
                 <Stack direction={"row"}>
@@ -134,11 +160,11 @@ const GameDetail: React.FC = () => {
           >
             <WrapItem
               maxW="sm"
-              border="10px solid #ddd" 
-              borderRadius="md" 
-              p={4} 
-              justifyContent="center" 
-              alignItems="center" 
+              border="10px solid #ddd"
+              borderRadius="md"
+              p={4}
+              justifyContent="center"
+              alignItems="center"
             >
               <Center>
                 <Heading size="md" textTransform="uppercase">
@@ -161,65 +187,74 @@ const GameDetail: React.FC = () => {
       </div>
       <ScreenShots ids={id} />
       <div className="details">
-        {/* <Box boxShadow="dark-lg" marginTop="auto" marginBottom="auto">
-          <Card>
-            <CardHeader></CardHeader>
-            <CardBody>
-              <Stack divider={<StackDivider />} spacing="4">
-                <Box>
-                  <Heading size="md" textTransform="uppercase">
-                    Released: {gameDetail.released}
-                  </Heading>
-                </Box>
-                <Box>
-                </Box>
-                <Box>
-                  <Heading size="md" textTransform="uppercase">
-                    Website: <Text></Text>
-                    <a
-                      href={gameDetail.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {gameDetail.website}
-                    </a>
-                  </Heading>
-                </Box>
-                <Box>
-                </Box>
-              </Stack>
-            </CardBody>
-          </Card>
-        </Box> */}
         <Center>
-        <Heading as='h2' size='3xl' marginBottom={7} >
-          Achievments
-        </Heading>
+          <Heading as="h2" size="3xl" marginBottom={7}>
+            Achievments
+          </Heading>
         </Center>
-          <Achievments ids={id} />
-        
+        <Achievments ids={id} />
+
         <Box
-          boxShadow="outline"
           p="6"
-          marginTop={10}
+          marginTop={12}
           rounded="md"
           color="white"
           fontWeight="bold"
           borderRadius="md"
-          bgGradient="linear(to-r, teal.500, green.500)"
-          _hover={{
-            bgGradient: "linear(to-r, red.500, yellow.500)",
+          bg="rgba(44, 44, 44, 1)"
+          marginBottom={10}
+          style={{
+            boxShadow: "0 0 20px rgba(0, 0, 0, 0.5)",
+            borderRadius: "30px",
           }}
         >
           <HStack>
-
-          {formattedDescription.map((paragraph, index) => (
-            <Text key={index} mb={4}>
-              {paragraph}
-            </Text>
-          ))}
+            <VStack>
+              {formattedDescription.map((paragraph, index) => (
+                <Text key={index} mb={4}>
+                  {paragraph}
+                </Text>
+              ))}
+            </VStack>
+            <Image
+              src={gameDetail.background_image}
+              boxSize="400px"
+              objectFit="cover"
+            />
           </HStack>
         </Box>
+        <Center>
+          <Box
+            boxShadow="dark-lg"
+            marginTop="20px"
+            marginBottom="50px"
+            maxW="600px"
+            width="100%"
+            border='4px'
+          >
+            <HStack>
+              <VStack margin='30px 0 30px 0' >
+                <Heading size="lg" marginLeft="40px">
+                  <a
+                    href={gameDetail.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {formattedlink}
+                  </a>
+                </Heading>
+                <Text as="samp">Website:</Text>
+              </VStack>
+              <Spacer />
+              <VStack margin='30px 0 30px 0'>
+              <Heading size="lg" marginRight="30px">
+                {formattedDay} {monthName} {year}
+              </Heading>
+              <Text as="samp">Released: </Text>
+              </VStack>
+            </HStack>
+          </Box>
+        </Center>
         <Stores ids={id} />
       </div>
     </div>
