@@ -18,7 +18,7 @@ function Footer(){
         </Box>
         <Text>Copyright 2024 | THINULA JAYAVIHAN  </Text>
         <HStack>
-        <SocialIcon url="https://linkedin.com/in/couetilc" style={{
+        <SocialIcon url="https://github.com/edmthinula" style={{
           height: 30,
         }} />
                 <SocialIcon url="https://www.linkedin.com/in/thinula-jayavihan-00501827b/" style={{

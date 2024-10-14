@@ -1,4 +1,4 @@
-import { Box, Button,Divider,Show } from "@chakra-ui/react";
+import { Box, Button,Center,Divider,Show } from "@chakra-ui/react";
 import { Flex, useBreakpointValue } from "@chakra-ui/react";
 import {
   Drawer,
@@ -83,18 +83,9 @@ function App() {
             alignItems="center"
             marginBottom={5}
           >
-            <GameHeading gameQuery={gameQuery} />
-
-            {/* <Show below="lg">
-              <Button
-                ref={btnRef}
-                colorScheme="teal"
-                onClick={onOpen}
-                marginRight={4}
-              >
-                <HamburgerIcon />
-              </Button>
-            </Show> */}
+  <Center width="100%">
+    <GameHeading gameQuery={gameQuery} />
+  </Center>
           </Flex>
 
           {/* Platform Selector and Sort Options */}

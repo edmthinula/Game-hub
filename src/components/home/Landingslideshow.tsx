@@ -27,6 +27,20 @@ function Landingslideshow() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [trailer, settrailer] = useState<string>();
   const [trailhead, settrailhead] = useState<string>();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 700);
+    };
+
+    // Check on initial load
+    handleResize();
+    
+    // Add event listener to detect screen size change
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleButtonClick = (index: number) => {
     setCurrentSlide(index);
@@ -57,10 +71,10 @@ function Landingslideshow() {
               style={{
                 height: "100vh", 
                 width: "100vw",
-                background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 2)), url(${slides.pc})`,
-                backgroundSize: "100% 200px, cover",
-                backgroundPosition: "bottom, center",
-                backgroundRepeat: "no-repeat, no-repeat",
+                background: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(${isMobile ? slides.mobile : slides.pc})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
               }}
             >
               <Heading
