@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Navbar from'../components/Gamedetails/Navbar';
 import {
   Box,
   Button,
@@ -18,13 +19,15 @@ import {
   WrapItem,
   Image,
   VStack,
-  useBreakpointValue
+  useBreakpointValue,
+  Divider
 } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import ScreenShots from "../components/Gamedetails/ScreenShots";
 import Achievments from "../components/Gamedetails/Achievments";
 import Stores from "../components/Gamedetails/Stores";
 import "./gamedetails.css";
+import Footer from "../components/Footer";
 
 interface GameDetail {
   id: number;
@@ -70,13 +73,13 @@ const GameDetail: React.FC = () => {
   if (!gameDetail) return <div>No data available</div>;
 
   const formattedDescription = gameDetail.description
-    .split("Español")[0] // Split and take only the English part
-    .replace(/<br\s*\/?>/gi, "") // Remove all <br/> tags
-    .replace(/<\/?p>/gi, "") // Remove all <p> and </p> tags
+    .split("Español")[0] 
+    .replace(/<br\s*\/?>/gi, "")
+    .replace(/<\/?p>/gi, "") 
     .split("\n");
 
   const formattedlink = gameDetail.website
-    .replace(/^https?:\/\//i, "") // Remove http:// or https://
+    .replace(/^https?:\/\//i, "") 
     .replace(/^www\./i, "")
     .replace(/\.com(.*)$/, ".com");
 
@@ -103,6 +106,7 @@ const GameDetail: React.FC = () => {
 
   return (
     <div>
+      <Navbar title={gameDetail.name} />
       <div
         style={{
           position: "absolute",
@@ -195,14 +199,27 @@ const GameDetail: React.FC = () => {
         </Show>
       </div>
       <ScreenShots ids={id} />
-      <div className="details">
+      <div className="details"
+      style={{
+        padding:'0',
+         background: "repeating-linear-gradient(to bottom, rgba(83, 83, 83, 1) 0%, rgba(19, 19, 19, 1) 25%,rgba(83, 83, 83, 1) 50%)"
+        }}
+    
+      >
+        <div 
+        style={{
+          background:'rgba(39, 39, 39, 1)',
+          
+        }}
+        >
         <Center>
           <Heading as="h2" size="3xl" marginBottom={7}>
             Achievments
           </Heading>
         </Center>
         <Achievments ids={id} />
-        <Center>
+        </div>
+        <Center margin='0 25px 0 25px'>
           <Box
             p="6"
             marginTop={12}
@@ -313,6 +330,8 @@ const GameDetail: React.FC = () => {
             </div>
           </Stack>
         </Center>
+        <Divider margin='20px 0 0 0'/>
+        <Footer/>
       </div>
     </div>
   );

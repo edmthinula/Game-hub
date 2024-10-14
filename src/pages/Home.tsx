@@ -1,4 +1,4 @@
-import { Box, Button,Show } from "@chakra-ui/react";
+import { Box, Button,Divider,Show } from "@chakra-ui/react";
 import { Flex, useBreakpointValue } from "@chakra-ui/react";
 import {
   Drawer,
@@ -21,6 +21,7 @@ import { PlatformSelector } from "../components/home/PlatformSelector";
 import { platform } from "../hooks/useGames";
 import SortSelector from "../components/home/SortSelector";
 import GameHeading from "../components/home/GameHeading";
+import Footer from "../components/Footer";
 
 export interface GameQuery {
   genere: Genere | null;
@@ -146,6 +147,8 @@ function App() {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
+      <Divider margin='20px 0 0 0'/>
+      <Footer/>
     </Flex>
   );
 }
