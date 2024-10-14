@@ -1,4 +1,4 @@
-import { Button, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Divider, Flex, Heading, HStack, Image, Show, Text } from "@chakra-ui/react";
 import {
   Drawer,
   DrawerBody,
@@ -17,6 +17,8 @@ import GameHeading from "./home/GameHeading";
 import { GameQuery } from "../pages/Home";
 import GenereList from "./home/GenereList";
 import { Genere } from "../hooks/useGenere";
+import { PlatformSelector } from "./home/PlatformSelector";
+import SortSelector from "./home/SortSelector";
 interface Props {
   gameQuery: GameQuery;  // Receive gameQuery as prop
   setGameQuery: (query: GameQuery) => void;  // Receive setGameQuery function as prop
@@ -40,6 +42,28 @@ const NavBar = ({ onSearch }: Props) => {
       </Button>
       <Image src={Logo} boxSize="60px" borderRadius={20} />
       <SearchInput onSearch={onSearch} />
+      <Show above="700px">
+      <Flex marginLeft='10px'  direction={{ base: "column", lg: "row" }}>
+            <Flex marginRight={5} direction={{ base: "row", lg: "row" }}>
+              <Box>
+                <PlatformSelector
+                  selectedPlatform={gameQuery.platform}
+                  onselectPlatform={(platform) =>
+                    setGameQuery({ ...gameQuery, platform })
+                  }
+                />
+              </Box>
+              <Box marginLeft={5}>
+                <SortSelector
+                  sortOrder={gameQuery.sort}
+                  onselecetSortorder={(sort) =>
+                    setGameQuery({ ...gameQuery, sort })
+                  }
+                />
+              </Box>
+            </Flex>
+          </Flex>
+      </Show>
       <Drawer
         isOpen={isOpen}
         placement="left"
@@ -50,8 +74,13 @@ const NavBar = ({ onSearch }: Props) => {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>
-            <GameHeading gameQuery={gameQuery} />
+            <Center>
+                <Heading as='h2' size='3xl' marginTop='20px'>
+                    Games
+                  </Heading>
+            </Center>
           </DrawerHeader>
+          <Divider/>
           <DrawerBody>
             <GenereList
               selectedGenre={gameQuery.genere}

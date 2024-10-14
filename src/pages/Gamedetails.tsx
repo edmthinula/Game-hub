@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Navbar from'../components/Gamedetails/Navbar';
+import Navbar from "../components/Gamedetails/Navbar";
 import {
   Box,
   Button,
@@ -20,7 +20,7 @@ import {
   Image,
   VStack,
   useBreakpointValue,
-  Divider
+  Divider,
 } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import ScreenShots from "../components/Gamedetails/ScreenShots";
@@ -45,11 +45,12 @@ const GameDetail: React.FC = () => {
   const [gameDetail, setGameDetail] = useState<GameDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setLoading] = useState(true);
+  const storesRef = useRef<HTMLDivElement>(null);
 
   const align = useBreakpointValue({
-    lg: 'start',
-    md: 'center',
-    sm: 'center',
+    lg: "start",
+    md: "center",
+    sm: "center",
   });
 
   useEffect(() => {
@@ -73,13 +74,13 @@ const GameDetail: React.FC = () => {
   if (!gameDetail) return <div>No data available</div>;
 
   const formattedDescription = gameDetail.description
-    .split("Español")[0] 
+    .split("Español")[0]
     .replace(/<br\s*\/?>/gi, "")
-    .replace(/<\/?p>/gi, "") 
+    .replace(/<\/?p>/gi, "")
     .split("\n");
 
   const formattedlink = gameDetail.website
-    .replace(/^https?:\/\//i, "") 
+    .replace(/^https?:\/\//i, "")
     .replace(/^www\./i, "")
     .replace(/\.com(.*)$/, ".com");
 
@@ -102,7 +103,11 @@ const GameDetail: React.FC = () => {
   const [year, month, day] = releasedDate.split(" ");
   const monthName = months[parseInt(month) - 1];
   const formattedDay = parseInt(day).toString();
-
+  const scrollToStores = () => {
+    if (storesRef.current) {
+      storesRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div>
@@ -119,7 +124,11 @@ const GameDetail: React.FC = () => {
         <Heading as="h2" size="3xl">
           {gameDetail.name}
         </Heading>
-        <Button top="10vh" colorScheme="yellow" borderRadius="20px">
+        <Button
+          top="10vh"
+          colorScheme="yellow"
+          onClick={scrollToStores}
+        >
           Purchase
         </Button>
         <Hide below="802px">
@@ -199,27 +208,27 @@ const GameDetail: React.FC = () => {
         </Show>
       </div>
       <ScreenShots ids={id} />
-      <div className="details"
-      style={{
-        padding:'0',
-         background: "repeating-linear-gradient(to bottom, rgba(83, 83, 83, 1) 0%, rgba(19, 19, 19, 1) 25%,rgba(83, 83, 83, 1) 50%)"
-        }}
-    
-      >
-        <div 
+      <div
+        className="details"
         style={{
-          background:'rgba(39, 39, 39, 1)',
-          
+          padding: "0",
+          background:
+            "repeating-linear-gradient(to bottom, rgba(83, 83, 83, 1) 0%, rgba(19, 19, 19, 1) 25%,rgba(83, 83, 83, 1) 50%)",
         }}
+      >
+        <div
+          style={{
+            background: "rgba(39, 39, 39, 1)",
+          }}
         >
-        <Center>
-          <Heading as="h2" size="3xl" marginBottom={7}>
-            Achievments
-          </Heading>
-        </Center>
-        <Achievments ids={id} />
+          <Center>
+            <Heading as="h2" size="3xl" marginBottom={7}>
+              Achievments
+            </Heading>
+          </Center>
+          <Achievments ids={id} />
         </div>
-        <Center margin='0 25px 0 25px'>
+        <Center margin="0 25px 0 25px">
           <Box
             p="6"
             marginTop={12}
@@ -243,12 +252,12 @@ const GameDetail: React.FC = () => {
                   </Text>
                 ))}
               </VStack>
-              <Show breakpoint='(min-width: 1040px)'>
-              <Image
-                src={gameDetail.background_image}
-                boxSize="400px"
-                objectFit="cover"
-              />
+              <Show breakpoint="(min-width: 1040px)">
+                <Image
+                  src={gameDetail.background_image}
+                  boxSize="400px"
+                  objectFit="cover"
+                />
               </Show>
             </HStack>
           </Box>
@@ -296,7 +305,7 @@ const GameDetail: React.FC = () => {
             maxW="1000px"
             width="100%"
           >
-                <VStack align={align} width="100%" maxW="600px">
+            <VStack align={align} width="100%" maxW="600px">
               <Text
                 fontWeight="800"
                 fontSize="40px"
@@ -326,12 +335,14 @@ const GameDetail: React.FC = () => {
                 justifyContent: "center",
               }}
             >
-              <Stores ids={id} />
+              <div ref={storesRef}>
+                <Stores ids={id} />
+              </div>
             </div>
           </Stack>
         </Center>
-        <Divider margin='20px 0 0 0'/>
-        <Footer/>
+        <Divider margin="20px 0 0 0" />
+        <Footer />
       </div>
     </div>
   );

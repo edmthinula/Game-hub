@@ -130,9 +130,14 @@ function Landingslideshow() {
           {Slidesarray.map((_, index) => (
             <Button
               key={index}
-              colorScheme={index === currentslide ? "teal" : "purple"}
-              size="xs"
-              borderRadius="50%"
+              colorScheme={index === currentslide ? "gray" : "cyan"}
+              // size="xs"
+              // borderRadius="20%"
+              style={{
+                width: "45px",
+                height:'10px',
+                
+              }}
               onClick={() => handleButtonClick(index)}
             />
           ))}

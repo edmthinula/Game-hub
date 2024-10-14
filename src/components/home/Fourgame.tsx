@@ -17,10 +17,10 @@ import {
 } from "@chakra-ui/react";
 import GODofwar from "../../images/Ragnarök-culture-ar1qdh.webp";
 import star5 from "../../images/5star.png";
-import last2 from '../../images/last2.jpg';
-import spidy from '../../images/spiderman.jpg';
-import creed from '../../images/assasins.jpg';
-import horizon from '../../images/horizon.jpg';
+import last2 from "../../images/last2.jpg";
+import spidy from "../../images/spiderman.jpg";
+import creed from "../../images/assasins.jpg";
+import horizon from "../../images/horizon.jpg";
 import { Link } from "react-router-dom";
 
 function Fourgame() {
@@ -40,21 +40,28 @@ function Fourgame() {
                     alt="God of war"
                   />
                 </Box>
-                <Box  maxW="35vw">
-                <Heading marginTop='1vh' fontWeight={100} size='lg'>Marvel's</Heading>
-                <Heading  marginBottom='4vh'>Spider Man 2 </Heading>
-                  Embark on an epic and heartfelt journey as Kratos and Atreus
-                  struggle with holding on and letting go From Santa Monica
-                  Studio comes the sequel to the critically acclaimed God of War
-                  (2018).
+                <Box maxW="35vw">
+                  <Heading marginTop="1vh" fontWeight={100} size="lg">
+                    Marvel's
+                  </Heading>
+                  <Heading marginBottom="4vh">Spider Man 2 </Heading>
+                  Swing into action as Peter Parker and Miles Morales face their
+                  greatest challenges yet in a thrilling battle to save New
+                  York. Developed by Insomniac Games, this sequel brings intense
+                  web-slinging, dynamic combat, and an emotional story that
+                  pushes both heroes to their limits
                   <Flex marginTop="1vh">
-                    <Link to={'/game/662316'}>
-                    <Button marginTop='0.5vh' colorScheme="teal" variant="outline">
-                      More
-                    </Button>
+                    <Link to={"/game/662316"}>
+                      <Button
+                        marginTop="0.5vh"
+                        colorScheme="teal"
+                        variant="outline"
+                      >
+                        More
+                      </Button>
                     </Link>
                     <Spacer />
-                    <Box                      
+                    <Box
                       marginBottom={0}
                       display="flex"
                       flexDirection="column"
@@ -78,21 +85,28 @@ function Fourgame() {
 
             <Center>
               <Stack direction={["column", "row"]} spacing="3vw">
-                <Box  maxW="35vw">
-                <Heading marginTop='1vh' fontWeight={100} size='lg'>Assassin's Creed</Heading>
-                <Heading  marginBottom='4vh'>Mirage</Heading>
-                  Embark on an epic and heartfelt journey as Kratos and Atreus
-                  struggle with holding on and letting go From Santa Monica
-                  Studio comes the sequel to the critically acclaimed God of War
-                  (2018).
+                <Box maxW="35vw">
+                  <Heading marginTop="1vh" fontWeight={100} size="lg">
+                    Assassin's Creed
+                  </Heading>
+                  <Heading marginBottom="4vh">Mirage</Heading>
+                  Swing into action as Peter Parker and Miles Morales face their
+                  greatest challenges yet in a thrilling battle to save New
+                  York. Developed by Insomniac Games, this sequel brings intense
+                  web-slinging, dynamic combat, and an emotional story that
+                  pushes both heroes to their limits
                   <Flex marginTop="1vh">
-                    <Link to='/game/845261'>
-                    <Button marginTop='0.5vh' colorScheme="teal" variant="outline">
-                      More
-                    </Button>
+                    <Link to="/game/845261">
+                      <Button
+                        marginTop="0.5vh"
+                        colorScheme="teal"
+                        variant="outline"
+                      >
+                        More
+                      </Button>
                     </Link>
                     <Spacer />
-                    <Box                      
+                    <Box
                       marginBottom={0}
                       display="flex"
                       flexDirection="column"
@@ -125,7 +139,7 @@ function Fourgame() {
 
             <Center>
               <Stack direction={["column", "row"]} spacing="3vw">
-              <Box w="40vw" h="26vh">
+                <Box w="40vw" h="26vh">
                   <Image
                     height="25vh"
                     width="45vw"
@@ -134,21 +148,28 @@ function Fourgame() {
                     alt="God of war"
                   />
                 </Box>
-                <Box  maxW="35vw">
-                <Heading marginTop='1vh' fontWeight={100} size='lg'>Horizon</Heading>
-                <Heading  marginBottom='4vh'>Forbidden West</Heading>
-                  Embark on an epic and heartfelt journey as Kratos and Atreus
-                  struggle with holding on and letting go From Santa Monica
-                  Studio comes the sequel to the critically acclaimed God of War
-                  (2018).
+                <Box maxW="35vw">
+                  <Heading marginTop="1vh" fontWeight={100} size="lg">
+                    Horizon
+                  </Heading>
+                  <Heading marginBottom="4vh">Forbidden West</Heading>
+                  Join Aloy on a breathtaking journey through majestic, untamed
+                  lands in this sequel to Horizon Zero Dawn. Explore mysterious
+                  new regions, face awe-inspiring machines, and uncover hidden
+                  dangers as you fight to save the world from a looming
+                  catastrophe.
                   <Flex marginTop="1vh">
-                    <Link to='/game/966906'>
-                    <Button marginTop='0.5vh' colorScheme="teal" variant="outline">
-                      More
-                    </Button>
+                    <Link to="/game/966906">
+                      <Button
+                        marginTop="0.5vh"
+                        colorScheme="teal"
+                        variant="outline"
+                      >
+                        More
+                      </Button>
                     </Link>
                     <Spacer />
-                    <Box                      
+                    <Box
                       marginBottom={0}
                       display="flex"
                       flexDirection="column"
@@ -171,21 +192,28 @@ function Fourgame() {
             </Center>
             <Center>
               <Stack direction={["column", "row"]} spacing="3vw">
-                <Box  maxW="35vw">
-                <Heading marginTop='1vh' fontWeight={100} size='lg'>Last Of Us</Heading>
-                <Heading  marginBottom='4vh'>Part II</Heading>
-                  Embark on an epic and heartfelt journey as Kratos and Atreus
-                  struggle with holding on and letting go From Santa Monica
-                  Studio comes the sequel to the critically acclaimed God of War
-                  (2018).
+                <Box maxW="35vw">
+                  <Heading marginTop="1vh" fontWeight={100} size="lg">
+                    Last Of Us
+                  </Heading>
+                  <Heading marginBottom="4vh">Part II</Heading>
+                  Experience an emotional and intense journey in a
+                  post-apocalyptic world as Ellie seeks vengeance and justice.
+                  Developed by Naughty Dog, this sequel to the acclaimed The
+                  Last of Us pushes the boundaries of storytelling, survival,
+                  and human resilience.
                   <Flex marginTop="1vh">
-                  <Link to='/game/51325'>
-                    <Button marginTop='0.5vh' colorScheme="teal" variant="outline">
-                      More
-                    </Button>
+                    <Link to="/game/51325">
+                      <Button
+                        marginTop="0.5vh"
+                        colorScheme="teal"
+                        variant="outline"
+                      >
+                        More
+                      </Button>
                     </Link>
                     <Spacer />
-                    <Box                      
+                    <Box
                       marginBottom={0}
                       display="flex"
                       flexDirection="column"

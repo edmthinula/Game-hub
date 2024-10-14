@@ -1,4 +1,4 @@
-import { Box, Button,Center,Divider,Show } from "@chakra-ui/react";
+import { Box, Button, Center, Divider, Show } from "@chakra-ui/react";
 import { Flex, useBreakpointValue } from "@chakra-ui/react";
 import {
   Drawer,
@@ -9,7 +9,6 @@ import {
   DrawerCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
 import NavBar from "../components/NavBar";
 import GameGrid from "../components/home/GameGrid";
 import GenereList from "../components/home/GenereList";
@@ -43,8 +42,9 @@ function App() {
   return (
     <Flex direction="column">
       {/* NavBar */}
-      <Box>
+      <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }}>
         <NavBar
+        
           gameQuery={gameQuery}
           setGameQuery={setGameQuery}
           onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
@@ -52,44 +52,26 @@ function App() {
       </Box>
 
       {/* Slideshow */}
-      <Box mt={4} marginBottom='-120px'>
+      <Box mt={4} marginBottom="-120px">
         <Landingslideshow />
       </Box>
-      <Box mt={4} display="flex" justifyContent="center"  zIndex={10} top='90vh'>
+      <Box mt={4} display="flex" justifyContent="center" zIndex={10} top="90vh">
         <Fourgame />
       </Box>
 
-      <Flex
-        direction={flexDirection} // Stack items vertically on smaller screens
-        mt={5}
-      >
-
-        {/* <Show above="lg">
-          <Box flex="1" paddingX={5} marginBottom={5}>
-            <GenereList
-              selectedGenre={gameQuery.genere}
-              onSelectGenre={(genere: Genere) =>
-                setGameQuery({ ...gameQuery, genere })
-              }
-            />
-          </Box>
-        </Show> */}
-
-        {/* Main Content (GameGrid) */}
+      <Flex direction={flexDirection} mt={5}>
         <Box flex="3" paddingLeft={2}>
-          {/* Heading and Controls */}
           <Flex
             justifyContent="space-between"
             alignItems="center"
             marginBottom={5}
           >
-  <Center width="100%">
-    <GameHeading gameQuery={gameQuery} />
-  </Center>
+            <Center width="100%">
+              <GameHeading gameQuery={gameQuery} />
+            </Center>
           </Flex>
-
-          {/* Platform Selector and Sort Options */}
-          <Flex marginBottom={5} direction={{ base: "column", lg: "row" }}>
+          <Show below="700px">
+          <Flex marginLeft='10px' marginBottom={5} direction={{ base: "column", lg: "row" }}>
             <Flex marginRight={5} direction={{ base: "row", lg: "row" }}>
               <Box>
                 <PlatformSelector
@@ -109,6 +91,7 @@ function App() {
               </Box>
             </Flex>
           </Flex>
+          </Show>
 
           {/* GameGrid */}
           <GameGrid gameQuery={gameQuery} />
@@ -138,8 +121,8 @@ function App() {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-      <Divider margin='20px 0 0 0'/>
-      <Footer/>
+      <Divider margin="20px 0 0 0" />
+      <Footer />
     </Flex>
   );
 }
