@@ -116,12 +116,16 @@ const GameDetail: React.FC = () => {
         style={{
           position: "absolute",
           zIndex: 10,
-          top: "23%",
+          top: "20%",
           left: "4vw",
           width: "90%",
         }}
       >
-        <Heading as="h2" size="3xl">
+        <Heading as="h2" size="3xl"
+        style={{
+        textShadow: '5px 5px 5px black'
+        }}
+        >
           {gameDetail.name}
         </Heading>
         <Button
@@ -131,14 +135,14 @@ const GameDetail: React.FC = () => {
         >
           Purchase
         </Button>
-        <Hide below="802px">
+        <Hide below="1503px">
           <Stack
             direction={"row"}
             spacing="10"
             style={{
-              top: "40vh",
+              top: "30vh",
               position: "absolute",
-              left: "40vw",
+              left: "50vw",
             }}
           >
             <WrapItem
@@ -148,18 +152,21 @@ const GameDetail: React.FC = () => {
               p={4}
               justifyContent="center"
               alignItems="center"
+              backgroundColor="rgba(0, 0, 0, 0.5)" 
             >
               <Center>
                 <Stack direction={"row"}>
                   <Heading as="h1" size="4xl">
                     {gameDetail.metacritic}
                   </Heading>
-                  <Text fontSize="xl">Metacritic Score</Text>
+                  <Text fontSize="xl">Metacritic<br></br> Score</Text>
                 </Stack>
               </Center>
             </WrapItem>
-            <WrapItem borderWidth="1px" borderRadius="lg" maxW="sm">
-              <Heading size="md" textTransform="uppercase">
+            <WrapItem 
+              backgroundColor="rgba(0, 0, 0, 0.5)" 
+            border="10px solid #ddd" borderRadius="lg" maxW="sm">
+              <Heading size="md" textTransform="uppercase" padding='2px'>
                 available on:{" "}
                 <Text>
                   {gameDetail.platforms
@@ -170,14 +177,14 @@ const GameDetail: React.FC = () => {
             </WrapItem>
           </Stack>
         </Hide>
-        <Show below="802px">
+        <Show below="1503px">
           <Stack
             direction={"column"}
             spacing="3"
             style={{
-              top: "35vh",
+              top: "20vh",
               position: "absolute",
-              left: "40vw",
+              left: "60vw",
             }}
           >
             <WrapItem
@@ -194,7 +201,9 @@ const GameDetail: React.FC = () => {
                 </Heading>
               </Center>
             </WrapItem>
-            <WrapItem borderWidth="1px" borderRadius="lg" maxW="sm">
+            <WrapItem 
+              backgroundColor="rgba(0, 0, 0, 0.5)" 
+            border="10px solid #ddd" borderRadius="lg" maxW="sm">
               <Heading size="md" textTransform="uppercase">
                 Platforms:{" "}
                 <Text>
@@ -221,12 +230,19 @@ const GameDetail: React.FC = () => {
             background: "rgba(39, 39, 39, 1)",
           }}
         >
-          <Center>
+          <Center padding='20px'>
             <Heading as="h2" size="3xl" marginBottom={7}>
               Achievments
             </Heading>
           </Center>
+          <div style={{
+            width:'90%',
+            maxWidth:'1980px',
+            margin:'auto'
+          }}>
+            <Center></Center>
           <Achievments ids={id} />
+          </div>
         </div>
         <Center margin="0 25px 0 25px">
           <Box

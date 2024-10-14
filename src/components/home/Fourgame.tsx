@@ -76,7 +76,7 @@ function Fourgame() {
                         height="15px"
                         marginTop={0}
                       />
-                      (23)
+                      (93)
                     </Box>
                   </Flex>
                 </Box>
@@ -121,7 +121,7 @@ function Fourgame() {
                         height="15px"
                         marginTop={0}
                       />
-                      (23)
+                      (84)
                     </Box>
                   </Flex>
                 </Box>
@@ -176,7 +176,7 @@ function Fourgame() {
                       alignItems="flex-end"
                       textAlign="right"
                     >
-                      1 year
+                      2 year
                       <Image
                         src={star5}
                         alt="rating"
@@ -184,7 +184,7 @@ function Fourgame() {
                         height="15px"
                         marginTop={0}
                       />
-                      (23)
+                      (93)
                     </Box>
                   </Flex>
                 </Box>
@@ -220,7 +220,7 @@ function Fourgame() {
                       alignItems="flex-end"
                       textAlign="right"
                     >
-                      1 year
+                      4 year
                       <Image
                         src={star5}
                         alt="rating"
@@ -228,7 +228,7 @@ function Fourgame() {
                         height="15px"
                         marginTop={0}
                       />
-                      (23)
+                      (64)
                     </Box>
                   </Flex>
                 </Box>

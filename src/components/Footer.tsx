@@ -13,7 +13,8 @@ function Footer(){
           <HStack>
           <Image src={TJ}
           boxSize='40px'
-          />       
+          />
+          <Text fontSize='20px' color='white'>.Game Hub</Text>
           </HStack>
         </Box>
         <Text>Copyright 2024 | THINULA JAYAVIHAN  </Text>

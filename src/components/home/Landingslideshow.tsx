@@ -83,6 +83,9 @@ function Landingslideshow() {
                 position="absolute"
                 top="35vh"
                 left="3vw"
+                style={{
+                          textShadow: '5px 5px 5px black'
+                }}
               >
                 {slides.name}
               </Heading>

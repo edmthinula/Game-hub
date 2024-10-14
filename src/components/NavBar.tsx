@@ -18,6 +18,7 @@ import { Genere } from "../hooks/useGenere";
 import { PlatformSelector } from "./home/PlatformSelector";
 import SortSelector from "./home/SortSelector";
 import { platform } from "../hooks/useGames"; // Make sure this import is correct
+import { MdPadding } from "react-icons/md";
 
 interface Props {
   gameQuery: GameQuery; // Receive gameQuery as prop
@@ -48,7 +49,7 @@ const NavBar = ({ gameQuery, setGameQuery, onSearch, scrollToGameGrid }: Props) 
       bg="#1a202c"
       w="100%"
     >
-      <Button ref={btnRef} colorScheme="teal" onClick={onOpen} marginRight={4}>
+      <Button ref={btnRef} colorScheme="gray" onClick={onOpen} marginRight={4}>
         <HamburgerIcon />
       </Button>
       <Image src={Logo} boxSize="60px" borderRadius={20} />
@@ -88,7 +89,11 @@ const NavBar = ({ gameQuery, setGameQuery, onSearch, scrollToGameGrid }: Props) 
             </Center>
           </DrawerHeader>
           <Divider />
-          <DrawerBody>
+          <DrawerBody
+                  style={{
+                    padding:0
+                  }}
+          >
             <GenereList
               selectedGenre={gameQuery.genere}
               onSelectGenre={(genere: Genere) =>

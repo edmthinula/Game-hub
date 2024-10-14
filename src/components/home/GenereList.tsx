@@ -26,24 +26,32 @@ const GenereList = ({ onSelectGenre, selectedGenre }: Props) => {
       <List>
         {data.map((genre) => (
           <ListItem paddingY="4px" key={genre.id}>
-            <HStack>
+            <Button
+              width="100%"
+              variant={genre.id === selectedGenre?.id ? "solid" : "ghost"}
+              colorScheme="gray"
+              onClick={() => onSelectGenre(genre)}
+              marginBottom="4px"
+              display="flex" // Add this line
+              alignItems="center" // Add this line
+              justifyContent="flex-start"
+            >
               <Image
                 boxSize="32px"
                 borderRadius={8}
                 objectFit="cover"
                 src={getCroppedImageUrl(genre.image_background)}
+                marginRight="30px"
+                marginLeft="30px"
               />
-              <Button
-                whiteSpace="normal"
-                textAlign="left"
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-                onClick={() => onSelectGenre(genre)}
-                fontSize="lg"
-                variant="link"
-              >
-                {genre.name}
-              </Button>
-            </HStack>
+              <span
+              style={{
+                color:'rgba(211, 211, 211, 1)'
+              }}>
+                
+              {genre.name}
+              </span>
+            </Button>
           </ListItem>
         ))}
       </List>
