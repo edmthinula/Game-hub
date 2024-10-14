@@ -22,12 +22,12 @@ import {
   useBreakpointValue,
   Divider,
 } from "@chakra-ui/react";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import ScreenShots from "../components/Gamedetails/ScreenShots";
 import Achievments from "../components/Gamedetails/Achievments";
 import Stores from "../components/Gamedetails/Stores";
 import "./gamedetails.css";
 import Footer from "../components/Footer";
+import { Triangle } from "react-loader-spinner";
 
 interface GameDetail {
   id: number;
@@ -69,7 +69,17 @@ const GameDetail: React.FC = () => {
 
     fetchGameDetail();
   }, [id]);
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return   <Center h="100vh">
+<Triangle
+  visible={true}
+  height="2500"
+  width="250"
+  color="#4fa94d"
+  ariaLabel="triangle-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  />
+</Center>
   if (error) return <div>Error: {error}</div>;
   if (!gameDetail) return <div>No data available</div>;
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Stack,
   VStack,
@@ -22,8 +22,33 @@ import spidy from "../../images/spiderman.jpg";
 import creed from "../../images/assasins.jpg";
 import horizon from "../../images/horizon.jpg";
 import { Link } from "react-router-dom";
+import { Triangle } from "react-loader-spinner";
 
 function Fourgame() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setLoading(false);
+    },2000);
+  },[])
+
+  if (loading) {
+    return (
+<Center h="100vh">
+<Triangle
+  visible={true}
+  height="2500"
+  width="250"
+  color="#4fa94d"
+  ariaLabel="triangle-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  />
+</Center>
+    );
+  }
+
   return (
     <div>
       <Card borderRadius={40} width="90vw" maxW="1980px">

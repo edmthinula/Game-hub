@@ -21,7 +21,9 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import { Triangle } from "react-loader-spinner";
 function Landingslideshow() {
+  const [loading, setLoading] = useState(true);
   const fadeRef = useRef<any>(null);
   const [currentslide, setCurrentSlide] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,6 +32,9 @@ function Landingslideshow() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 700);
     };
@@ -53,6 +58,21 @@ function Landingslideshow() {
     settrailer(url);
     onOpen();
   };
+  if (loading) {
+    return (
+<Center h="100vh">
+<Triangle
+  visible={true}
+  height="2500"
+  width="250"
+  color="#4fa94d"
+  ariaLabel="triangle-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  />
+</Center>
+    );
+  }
   return (
     <div className={styles.container}>
       <Fade

@@ -5,13 +5,8 @@ import "react-multi-carousel/lib/styles.css";
 import {
   Image,
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
   Stack,
-  Button,
-  ButtonGroup,
-  Divider,
   Heading,
   Text,
   Center,
