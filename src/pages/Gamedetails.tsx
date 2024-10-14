@@ -18,6 +18,7 @@ import {
   WrapItem,
   Image,
   VStack,
+  useBreakpointValue
 } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import ScreenShots from "../components/Gamedetails/ScreenShots";
@@ -41,6 +42,12 @@ const GameDetail: React.FC = () => {
   const [gameDetail, setGameDetail] = useState<GameDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setLoading] = useState(true);
+
+  const align = useBreakpointValue({
+    lg: 'start',
+    md: 'center',
+    sm: 'center',
+  });
 
   useEffect(() => {
     const fetchGameDetail = async () => {
@@ -92,6 +99,8 @@ const GameDetail: React.FC = () => {
   const [year, month, day] = releasedDate.split(" ");
   const monthName = months[parseInt(month) - 1];
   const formattedDay = parseInt(day).toString();
+
+
   return (
     <div>
       <div
@@ -193,36 +202,40 @@ const GameDetail: React.FC = () => {
           </Heading>
         </Center>
         <Achievments ids={id} />
-
-        <Box
-          p="6"
-          marginTop={12}
-          rounded="md"
-          color="white"
-          fontWeight="bold"
-          borderRadius="md"
-          bg="rgba(44, 44, 44, 1)"
-          marginBottom={10}
-          style={{
-            boxShadow: "0 0 20px rgba(0, 0, 0, 0.5)",
-            borderRadius: "30px",
-          }}
-        >
-          <HStack>
-            <VStack>
-              {formattedDescription.map((paragraph, index) => (
-                <Text key={index} mb={4}>
-                  {paragraph}
-                </Text>
-              ))}
-            </VStack>
-            <Image
-              src={gameDetail.background_image}
-              boxSize="400px"
-              objectFit="cover"
-            />
-          </HStack>
-        </Box>
+        <Center>
+          <Box
+            p="6"
+            marginTop={12}
+            rounded="md"
+            color="white"
+            fontWeight="bold"
+            borderRadius="md"
+            bg="rgba(44, 44, 44, 1)"
+            marginBottom={10}
+            style={{
+              boxShadow: "0 0 20px rgba(0, 0, 0, 0.5)",
+              borderRadius: "30px",
+            }}
+            maxW="2062px"
+          >
+            <HStack>
+              <VStack>
+                {formattedDescription.map((paragraph, index) => (
+                  <Text key={index} mb={4}>
+                    {paragraph}
+                  </Text>
+                ))}
+              </VStack>
+              <Show breakpoint='(min-width: 1040px)'>
+              <Image
+                src={gameDetail.background_image}
+                boxSize="400px"
+                objectFit="cover"
+              />
+              </Show>
+            </HStack>
+          </Box>
+        </Center>
         <Center>
           <Box
             boxShadow="dark-lg"
@@ -230,10 +243,10 @@ const GameDetail: React.FC = () => {
             marginBottom="50px"
             maxW="600px"
             width="100%"
-            border='4px'
+            border="4px"
           >
             <HStack>
-              <VStack margin='30px 0 30px 0' >
+              <VStack margin="30px 0 30px 0">
                 <Heading size="lg" marginLeft="40px">
                   <a
                     href={gameDetail.website}
@@ -246,16 +259,60 @@ const GameDetail: React.FC = () => {
                 <Text as="samp">Website:</Text>
               </VStack>
               <Spacer />
-              <VStack margin='30px 0 30px 0'>
-              <Heading size="lg" marginRight="30px">
-                {formattedDay} {monthName} {year}
-              </Heading>
-              <Text as="samp">Released: </Text>
+              <VStack margin="30px 0 30px 0">
+                <Heading size="lg" marginRight="30px">
+                  {formattedDay} {monthName} {year}
+                </Heading>
+                <Text as="samp">Released: </Text>
               </VStack>
             </HStack>
           </Box>
         </Center>
-        <Stores ids={id} />
+        <Center>
+          <Stack
+            direction={{
+              base: "column",
+              md: "column", // change to row direction at medium breakpoint
+              lg: "row", // change to column direction at large breakpoint
+            }}
+            spacing="24px"
+            maxW="1000px"
+            width="100%"
+          >
+                <VStack align={align} width="100%" maxW="600px">
+              <Text
+                fontWeight="800"
+                fontSize="40px"
+                color="rgba(172, 172, 172, 1)"
+              >
+                Purchase
+              </Text>
+              <HStack align={align} width="100%">
+                <Heading fontWeight="900" fontSize="60px">
+                  {gameDetail.name}
+                  <span
+                    style={{
+                      fontWeight: "600",
+                      fontSize: "35px",
+                      color: "rgba(172, 172, 172, 1)",
+                    }}
+                  >
+                    &nbsp;&nbsp;&nbsp;From
+                  </span>
+                </Heading>
+              </HStack>
+            </VStack>
+            <Spacer />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Stores ids={id} />
+            </div>
+          </Stack>
+        </Center>
       </div>
     </div>
   );
