@@ -31,7 +31,7 @@ export interface GameQuery {
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-
+  const gameGridRef = useRef<HTMLDivElement>(null); // Ref for scrolling to GameGrid
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
   const flexDirection = useBreakpointValue<"row" | "column">({
@@ -39,15 +39,22 @@ function App() {
     lg: "row",
   });
 
+  // Function to scroll to GameGrid
+  const scrollToGameGrid = () => {
+    if (gameGridRef.current) {
+      gameGridRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <Flex direction="column">
       {/* NavBar */}
       <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }}>
         <NavBar
-        
           gameQuery={gameQuery}
           setGameQuery={setGameQuery}
           onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
+          scrollToGameGrid={scrollToGameGrid} // Passing the scroll function
         />
       </Box>
 
@@ -55,6 +62,7 @@ function App() {
       <Box mt={4} marginBottom="-120px">
         <Landingslideshow />
       </Box>
+
       <Box mt={4} display="flex" justifyContent="center" zIndex={10} top="90vh">
         <Fourgame />
       </Box>
@@ -70,31 +78,34 @@ function App() {
               <GameHeading gameQuery={gameQuery} />
             </Center>
           </Flex>
+
           <Show below="700px">
-          <Flex marginLeft='10px' marginBottom={5} direction={{ base: "column", lg: "row" }}>
-            <Flex marginRight={5} direction={{ base: "row", lg: "row" }}>
-              <Box>
-                <PlatformSelector
-                  selectedPlatform={gameQuery.platform}
-                  onselectPlatform={(platform) =>
-                    setGameQuery({ ...gameQuery, platform })
-                  }
-                />
-              </Box>
-              <Box marginLeft={5}>
-                <SortSelector
-                  sortOrder={gameQuery.sort}
-                  onselecetSortorder={(sort) =>
-                    setGameQuery({ ...gameQuery, sort })
-                  }
-                />
-              </Box>
+            <Flex marginLeft="10px" marginBottom={5} direction={{ base: "column", lg: "row" }}>
+              <Flex marginRight={5} direction={{ base: "row", lg: "row" }}>
+                <Box>
+                  <PlatformSelector
+                    selectedPlatform={gameQuery.platform}
+                    onselectPlatform={(platform) =>
+                      setGameQuery({ ...gameQuery, platform })
+                    }
+                  />
+                </Box>
+                <Box marginLeft={5}>
+                  <SortSelector
+                    sortOrder={gameQuery.sort}
+                    onselecetSortorder={(sort) =>
+                      setGameQuery({ ...gameQuery, sort })
+                    }
+                  />
+                </Box>
+              </Flex>
             </Flex>
-          </Flex>
           </Show>
 
-          {/* GameGrid */}
-          <GameGrid gameQuery={gameQuery} />
+          {/* GameGrid with ref */}
+          <div ref={gameGridRef}>
+            <GameGrid gameQuery={gameQuery} />
+          </div>
         </Box>
       </Flex>
 
@@ -121,6 +132,7 @@ function App() {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
+
       <Divider margin="20px 0 0 0" />
       <Footer />
     </Flex>
