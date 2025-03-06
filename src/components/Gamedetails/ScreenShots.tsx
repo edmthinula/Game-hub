@@ -12,7 +12,7 @@ interface Screenshot {
 interface ScreenshotProps {
   ids: string | undefined;
 }
-
+const apikey = import.meta.env.VITE_RAWG_API;
 function ScreenShots({ ids }: ScreenshotProps) {
   const [screenshots, setScreenshots] = useState<Screenshot[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -22,7 +22,7 @@ function ScreenShots({ ids }: ScreenshotProps) {
     const fetchScreenshot = async () => {
       try {
         const response = await axios.get<{ results: Screenshot[] }>(
-          `https://api.rawg.io/api/games/${ids}/screenshots?key=7ff649f928e448d58ceaaadcb391c639`
+          `https://api.rawg.io/api/games/${ids}/screenshots?key=${apikey}`
         );
         setScreenshots(response.data.results);
       } catch (err) {

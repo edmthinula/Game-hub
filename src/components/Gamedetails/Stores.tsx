@@ -12,6 +12,7 @@ interface Store {
   name?: string; // name is optional since it will be fetched later
 }
 
+const apikey = import.meta.env.VITE_RAWG_API;
 function Stores({ ids }: StoresProps) {
   const [wherebuy, setWhereBuy] = useState<Store[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +21,7 @@ function Stores({ ids }: StoresProps) {
     const fetchWhereToBuy = async () => {
       try {
         const response = await axios.get<{ results: Store[] }>(
-          `https://api.rawg.io/api/games/${ids}/stores?key=7ff649f928e448d58ceaaadcb391c639`
+          `https://api.rawg.io/api/games/${ids}/stores?key=${apikey}`
         );
         const storesWithNames = await Promise.all(
           response.data.results.map(async (store) => {

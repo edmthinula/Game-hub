@@ -21,6 +21,7 @@ interface Achievments {
   description: string;
   image: string;
 }
+const apikey = import.meta.env.VITE_RAWG_API;
 function Achievments({ ids }: AchievmentsProps) {
   const [achi, setachi] = useState<Achievments[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -29,7 +30,7 @@ function Achievments({ ids }: AchievmentsProps) {
     const fetchAchievments = async () => {
       try {
         const response = await axios.get<{ results: Achievments[] }>(
-          `https://api.rawg.io/api/games/${ids}/achievements?key=7ff649f928e448d58ceaaadcb391c639`
+          `https://api.rawg.io/api/games/${ids}/achievements?key=${apikey}`
         );
         setachi(response.data.results);
       } catch (err) {

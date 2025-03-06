@@ -40,6 +40,7 @@ interface GameDetail {
   platforms: { platform: { name: string } }[];
 }
 
+const apikey = import.meta.env.VITE_RAWG_API;
 const GameDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [gameDetail, setGameDetail] = useState<GameDetail | null>(null);
@@ -57,7 +58,7 @@ const GameDetail: React.FC = () => {
     const fetchGameDetail = async () => {
       try {
         const response = await axios.get<GameDetail>(
-          `https://api.rawg.io/api/games/${id}?key=7ff649f928e448d58ceaaadcb391c639`
+          `https://api.rawg.io/api/games/${id}?key=${apikey}`
         );
         setGameDetail(response.data);
         setLoading(false);
