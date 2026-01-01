@@ -21,6 +21,7 @@ import { platform } from "../hooks/useGames";
 import SortSelector from "../components/home/SortSelector";
 import GameHeading from "../components/home/GameHeading";
 import Footer from "../components/Footer";
+import ChatBot from "../components/ChatBot";
 
 export interface GameQuery {
   genere: Genere | null;
@@ -31,7 +32,7 @@ export interface GameQuery {
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-  const gameGridRef = useRef<HTMLDivElement>(null); // Ref for scrolling to GameGrid
+  const gameGridRef = useRef<HTMLDivElement>(null); 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
   const flexDirection = useBreakpointValue<"row" | "column">({
@@ -132,7 +133,7 @@ function App() {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-
+      <ChatBot/>
       <Divider margin="20px 0 0 0" />
       <Footer />
     </Flex>
