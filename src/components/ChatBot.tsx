@@ -1,6 +1,4 @@
-// src/components/ChatBot.jsx
 import React, { useState, useRef, useEffect } from "react";
-import { GoogleGenAI } from "@google/genai";
 import {
   Box,
   Input,
@@ -23,7 +21,7 @@ import {
   ChevronUpIcon,
   ChevronDownIcon,
 } from "@chakra-ui/icons";
-import { SYSTEM_INSTRUCTION } from "../const/ChatbotConst";
+import apiClient from "../services/api-client";
 
 // Component to render formatted text
 interface FormattedMessageProps {
@@ -148,9 +146,6 @@ const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-  const apikey = import.meta.env.VITE_GEMINI_API_KEY;
-
-  const genAI = new GoogleGenAI({ apiKey: apikey });
 
   // Auto-scroll to bottom when new messages arrive
   const scrollToBottom = () => {
@@ -170,20 +165,10 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      const result = await genAI.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: [
-          {
-            role: "user",
-            parts: [{ text: input }],
-          },
-        ],
-        config: {
-          systemInstruction: SYSTEM_INSTRUCTION,
-        },
-      });
-
-      const text = result.text || "I couldn't generate a response.";
+      const response = await apiClient.post('/gemini',{
+        prompt:input,
+      })
+      const text = response.data.answer || "I couldn't generate a response.";
       setMessages((prev) => [...prev, { text: text, sender: "bot" }]);
     } catch (error) {
       console.error("Error fetching chat response:", error);
