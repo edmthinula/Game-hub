@@ -6,16 +6,13 @@ import {
   Box,
   Button,
   Center,
-  Flex,
   Heading,
   Hide,
   HStack,
   Show,
   Spacer,
   Stack,
-  StackDivider,
   Text,
-  Wrap,
   WrapItem,
   Image,
   VStack,
@@ -23,11 +20,12 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import ScreenShots from "../components/Gamedetails/ScreenShots";
-import Achievments from "../components/Gamedetails/Achievments";
+import Achievements from "../components/Gamedetails/Achievements";
 import Stores from "../components/Gamedetails/Stores";
 import "./gamedetails.css";
 import Footer from "../components/Footer";
 import { Triangle } from "react-loader-spinner";
+import useGameDetails from "../hooks/useGameDetails";
 
 interface GameDetail {
   id: number;
@@ -40,12 +38,9 @@ interface GameDetail {
   platforms: { platform: { name: string } }[];
 }
 
-const apikey = import.meta.env.VITE_RAWG_API;
 const GameDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [gameDetail, setGameDetail] = useState<GameDetail | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setLoading] = useState(true);
+  const {data:gameDetail ,isLoading,error} = useGameDetails(id||'')
   const storesRef = useRef<HTMLDivElement>(null);
 
   const align = useBreakpointValue({
@@ -54,33 +49,20 @@ const GameDetail: React.FC = () => {
     sm: "center",
   });
 
-  useEffect(() => {
-    const fetchGameDetail = async () => {
-      try {
-        const response = await axios.get<GameDetail>(
-          `https://api.rawg.io/api/games/${id}?key=${apikey}`
-        );
-        setGameDetail(response.data);
-        setLoading(false);
-      } catch (err) {
-        setError((err as Error).message);
-        setLoading(false);
-      }
-    };
-
-    fetchGameDetail();
-  }, [id]);
-  if (isLoading) return   <Center h="100vh">
-<Triangle
-  visible={true}
-  height="2500"
-  width="250"
-  color="#4fa94d"
-  ariaLabel="triangle-loading"
-  wrapperStyle={{}}
-  wrapperClass=""
-  />
-</Center>
+  if (isLoading)
+    return (
+      <Center h="100vh">
+        <Triangle
+          visible={true}
+          height="2500"
+          width="250"
+          color="#4fa94d"
+          ariaLabel="triangle-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </Center>
+    );
   if (error) return <div>Error: {error}</div>;
   if (!gameDetail) return <div>No data available</div>;
 
@@ -116,7 +98,7 @@ const GameDetail: React.FC = () => {
   const formattedDay = parseInt(day).toString();
   const scrollToStores = () => {
     if (storesRef.current) {
-      storesRef.current.scrollIntoView({ behavior: 'smooth' });
+      storesRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -132,18 +114,16 @@ const GameDetail: React.FC = () => {
           width: "90%",
         }}
       >
-        <Heading as="h2" size="3xl"
-        style={{
-        textShadow: '5px 5px 5px black'
-        }}
+        <Heading
+          as="h2"
+          size="3xl"
+          style={{
+            textShadow: "5px 5px 5px black",
+          }}
         >
           {gameDetail.name}
         </Heading>
-        <Button
-          top="10vh"
-          colorScheme="yellow"
-          onClick={scrollToStores}
-        >
+        <Button top="10vh" colorScheme="yellow" onClick={scrollToStores}>
           Purchase
         </Button>
         <Hide below="1503px">
@@ -163,21 +143,26 @@ const GameDetail: React.FC = () => {
               p={4}
               justifyContent="center"
               alignItems="center"
-              backgroundColor="rgba(0, 0, 0, 0.5)" 
+              backgroundColor="rgba(0, 0, 0, 0.5)"
             >
               <Center>
                 <Stack direction={"row"}>
                   <Heading as="h1" size="4xl">
                     {gameDetail.metacritic}
                   </Heading>
-                  <Text fontSize="xl">Metacritic<br></br> Score</Text>
+                  <Text fontSize="xl">
+                    Metacritic<br></br> Score
+                  </Text>
                 </Stack>
               </Center>
             </WrapItem>
-            <WrapItem 
-              backgroundColor="rgba(0, 0, 0, 0.5)" 
-            border="10px solid #ddd" borderRadius="lg" maxW="sm">
-              <Heading size="md" textTransform="uppercase" padding='2px'>
+            <WrapItem
+              backgroundColor="rgba(0, 0, 0, 0.5)"
+              border="10px solid #ddd"
+              borderRadius="lg"
+              maxW="sm"
+            >
+              <Heading size="md" textTransform="uppercase" padding="2px">
                 available on:{" "}
                 <Text>
                   {gameDetail.platforms
@@ -212,9 +197,12 @@ const GameDetail: React.FC = () => {
                 </Heading>
               </Center>
             </WrapItem>
-            <WrapItem 
-              backgroundColor="rgba(0, 0, 0, 0.5)" 
-            border="10px solid #ddd" borderRadius="lg" maxW="sm">
+            <WrapItem
+              backgroundColor="rgba(0, 0, 0, 0.5)"
+              border="10px solid #ddd"
+              borderRadius="lg"
+              maxW="sm"
+            >
               <Heading size="md" textTransform="uppercase">
                 Platforms:{" "}
                 <Text>
@@ -227,7 +215,7 @@ const GameDetail: React.FC = () => {
           </Stack>
         </Show>
       </div>
-      <ScreenShots ids={id} />
+      <ScreenShots id={id} />
       <div
         className="details"
         style={{
@@ -241,18 +229,20 @@ const GameDetail: React.FC = () => {
             background: "rgba(39, 39, 39, 1)",
           }}
         >
-          <Center padding='20px'>
+          <Center padding="20px">
             <Heading as="h2" size="3xl" marginBottom={7}>
               Achievments
             </Heading>
           </Center>
-          <div style={{
-            width:'90%',
-            maxWidth:'1980px',
-            margin:'auto'
-          }}>
+          <div
+            style={{
+              width: "90%",
+              maxWidth: "1980px",
+              margin: "auto",
+            }}
+          >
             <Center></Center>
-          <Achievments ids={id} />
+            <Achievements id={id} />
           </div>
         </div>
         <Center margin="0 25px 0 25px">
@@ -363,7 +353,7 @@ const GameDetail: React.FC = () => {
               }}
             >
               <div ref={storesRef}>
-                <Stores ids={id} />
+                <Stores id={id} />
               </div>
             </div>
           </Stack>

@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import "react-slideshow-image/dist/styles.css";
 import styles from "./Slider.module.css";
 import axios from "axios";
+import useScreenShots from "../../hooks/useScreenShots";
 
 interface Screenshot {
   id: number;
@@ -10,30 +11,11 @@ interface Screenshot {
 }
 
 interface ScreenshotProps {
-  ids: string | undefined;
+  id: string | undefined;
 }
-const apikey = import.meta.env.VITE_RAWG_API;
-function ScreenShots({ ids }: ScreenshotProps) {
-  const [screenshots, setScreenshots] = useState<Screenshot[]>([]);
-  const [error, setError] = useState<string | null>(null);
+function ScreenShots({ id }: ScreenshotProps) {
+  const { data, error, isLoading } = useScreenShots(id || "");
   const fadeRef = useRef<any>(null);
-
-  useEffect(() => {
-    const fetchScreenshot = async () => {
-      try {
-        const response = await axios.get<{ results: Screenshot[] }>(
-          `https://api.rawg.io/api/games/${ids}/screenshots?key=${apikey}`
-        );
-        setScreenshots(response.data.results);
-      } catch (err) {
-        setError((err as Error).message);
-      }
-    };
-
-    fetchScreenshot();
-  }, [ids]);
-
-
 
   return (
     <div className={styles.container}>
@@ -46,7 +28,7 @@ function ScreenShots({ ids }: ScreenshotProps) {
         pauseOnHover={false}
         arrows={false}
       >
-        {screenshots.map((screenshot) => (
+        {data.map((screenshot) => (
           <div className={styles.slide} key={screenshot.id}>
             <div
               style={{
@@ -59,7 +41,6 @@ function ScreenShots({ ids }: ScreenshotProps) {
           </div>
         ))}
       </Fade>
-
     </div>
   );
 }

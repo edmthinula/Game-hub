@@ -2,28 +2,24 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { AxiosRequestConfig, CanceledError } from "axios";
 
-interface FetchResponse<T> {
-  count: number;
-  results: T[];
-}
-
-const useData = <T>(
+// This hook is for fetching a SINGLE object (no 'results' array)
+const useEntity = <T>(
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
   deps?: any[]
 ) => {
-  const [data, setData] = useState<T[]>([]);
+  const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   useEffect(
     () => {
       const controller = new AbortController();
-
       setLoading(true);
 
+      // Matches your proxy pattern logic
       apiClient
-        .get<FetchResponse<T>>("/proxy", {
+        .get<T>("/proxy", {
           signal: controller.signal,
           ...requestConfig,
           params: {
@@ -32,7 +28,7 @@ const useData = <T>(
           },
         })
         .then((res) => {
-          setData(res.data.results);
+          setData(res.data);
           setLoading(false);
         })
         .catch((err) => {
@@ -43,9 +39,10 @@ const useData = <T>(
 
       return () => controller.abort();
     },
-    deps ? [...deps] : []
-  );
+    deps ? [...deps] : [endpoint]
+  ); // Re-fetch if endpoint changes
+
   return { data, error, isLoading };
 };
 
-export default useData;
+export default useEntity;
