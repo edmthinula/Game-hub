@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import {
@@ -11,38 +9,26 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
+import useAchievements from "../../hooks/useAchievements";
 
-interface AchievmentsProps {
-  ids: string | undefined;
+interface AchievementsProps {
+  id: string | undefined;
 }
-interface Achievments {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-}
-const apikey = import.meta.env.VITE_RAWG_API;
-function Achievments({ ids }: AchievmentsProps) {
-  const [achi, setachi] = useState<Achievments[]>([]);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchAchievments = async () => {
-      try {
-        const response = await axios.get<{ results: Achievments[] }>(
-          `https://api.rawg.io/api/games/${ids}/achievements?key=${apikey}`
-        );
-        setachi(response.data.results);
-      } catch (err) {
-        setError((err as Error).message);
-      }
-    };
-    fetchAchievments();
-  }, [ids]);
+function Achievements({ id }: AchievementsProps) {
+  // FIX 1: Call the hook unconditionally at the top level.
+  // If id is undefined, we pass an empty string (or handle it inside the hook),
+  // but we MUST call the hook every render.
+  const { data, error, isLoading } = useAchievements(id || "");
+
+  // FIX 2: If there is no ID, we shouldn't render the carousel at all.
+  if (!id) return null;
+
+  if (error) return null; // Or return <Text>Error loading achievements</Text>
+  if (isLoading) return null; // Or a Spinner
 
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 5,
     },
@@ -59,16 +45,17 @@ function Achievments({ ids }: AchievmentsProps) {
       items: 1,
     },
   };
+
   return (
     <>
       <Carousel responsive={responsive}>
-        {achi.map((achi) => (
+        {/* FIX 3: Use 'data' directly. No need for local state. */}
+        {data.map((achievement) => (
           <Card
-          
             maxW="lg"
             height="100%"
             width="80%"
-            key={achi.id}
+            key={achievement.id}
             position="relative"
             overflow="hidden"
           >
@@ -79,10 +66,10 @@ function Achievments({ ids }: AchievmentsProps) {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundImage: `url(${achi.image})`,
+                backgroundImage: `url(${achievement.image})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                filter: "blur(8px)", // Adjust the blur amount as needed
+                filter: "blur(8px)",
                 zIndex: 0,
               }}
             />
@@ -92,15 +79,15 @@ function Achievments({ ids }: AchievmentsProps) {
                 zIndex: 1,
                 background:
                   "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 50%)",
-                color: "white", // Set text color to white for better contrast
+                color: "white",
               }}
             >
               <Center>
                 <Image
-                  src={achi.image}
-                  alt={achi.name}
+                  src={achievement.image}
+                  alt={achievement.name}
                   borderRadius="lg"
-                  boxShadow="0 4px 8px rgba(0,0,0,0.2)" // Optional: adds a subtle shadow to the image
+                  boxShadow="0 4px 8px rgba(0,0,0,0.2)"
                 />
               </Center>
               <Stack
@@ -113,8 +100,8 @@ function Achievments({ ids }: AchievmentsProps) {
                   borderRadius: "0.5rem",
                 }}
               >
-                <Heading size="md">{achi.name}</Heading>
-                <Text>{achi.description}</Text>
+                <Heading size="md">{achievement.name}</Heading>
+                <Text>{achievement.description}</Text>
               </Stack>
             </CardBody>
           </Card>
@@ -124,4 +111,4 @@ function Achievments({ ids }: AchievmentsProps) {
   );
 }
 
-export default Achievments;
+export default Achievements;

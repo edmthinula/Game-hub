@@ -18,7 +18,6 @@ import { Genere } from "../hooks/useGenere";
 import { PlatformSelector } from "./home/PlatformSelector";
 import SortSelector from "./home/SortSelector";
 import { platform } from "../hooks/useGames"; // Make sure this import is correct
-import { MdPadding } from "react-icons/md";
 
 interface Props {
   gameQuery: GameQuery; // Receive gameQuery as prop
